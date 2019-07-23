@@ -1,0 +1,27 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -i bash
+#! nix-shell -p curl jq nix
+
+set -eufo pipefail
+
+function update {
+  FILE=$1
+  PROJECT=$2
+  BRANCH=${3:-master}
+
+  OWNER=$(jq -r '.[$project].owner' --arg project "$PROJECT" < "$FILE")
+  REPO=$(jq -r '.[$project].repo' --arg project "$PROJECT" < "$FILE")
+
+  REV=$(curl "https://api.github.com/repos/$OWNER/$REPO/branches/$BRANCH" | jq -r '.commit.sha')
+  SHA256=$(nix-prefetch-url --unpack "https://github.com/$OWNER/$REPO/archive/$REV.tar.gz")
+  TJQ=$(jq '.[$project] = {owner: $owner, repo: $repo, rev: $rev, sha256: $sha256}' \
+    --arg project "$PROJECT" \
+    --arg owner "$OWNER" \
+    --arg repo "$REPO" \
+    --arg rev "$REV" \
+    --arg sha256 "$SHA256" \
+    < "$FILE")
+  [[ $? == 0 ]] && echo "${TJQ}" >| "$FILE"
+}
+
+update versions.json nixpkgs nixos-19.03

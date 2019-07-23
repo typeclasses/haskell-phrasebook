@@ -2,6 +2,12 @@
 
 https://typeclasses.com/phrasebook
 
+## Outputs
+
+In addition to the code examples themselves, the results from running the examples are also included in this repository. An example's output is typically given the same name as its source file, with the extension changed; for example, the output of `hello-world.hs` is given by the file `hello-world.txt`.
+
+When any source code or dependency versions change, run `./generate-outputs`. This script runs all of the examples and updates the output files.
+
 ## Using Nix shell
 
 1. [Install Nix][install]
@@ -12,7 +18,7 @@ https://typeclasses.com/phrasebook
     $ nix-shell --pure
     ```
 
-3. Within the Nix shell, you have all of the dependencies required by the examples in the Phrasebook. You can run commands such as:
+3. Within the Nix shell, you have all of the dependencies required by the examples in the Phrasebook. For example, you can run commands like `runhaskell` and `ghcid`:
 
     ```
     $ runhaskell hello-world.hs
@@ -21,12 +27,11 @@ https://typeclasses.com/phrasebook
     
     ```
     $ ghcid --command 'ghci hello-world.hs'
-    
     ``` 
 
 ## Nix dependency versions
 
-The `update-versions` script updates the dependency hashes in `versions.json` to their latest commits. The JSON data is then used by `versions.nix`. This system is described in Vaibhav Sagar's blog post, [*Quick and Easy Nixpkgs Pinning*][vaibhav].
+Run `./update-versions` to update the dependency hashes in `versions.json` to their latest commits. The JSON data is then used by `versions.nix`. This system is described in Vaibhav Sagar's blog post, [*Quick and Easy Nixpkgs Pinning*][vaibhav].
 
   [install]:
     https://nixos.org/nix/manual/#chap-installation

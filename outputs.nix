@@ -3,7 +3,7 @@
 let
   run = name: hsFile:
     {
-      name = "${name}.txt";
+      inherit name;
       path = runCommand "phrasebook-output-${name}.txt"
         {
           buildInputs = [ ghc ];
@@ -17,5 +17,6 @@ let
 in
 
   linkFarm "haskell-phrasebook-outputs" [
-    (run "hello-world" ./hello-world.hs)
+    (run "hello-world.txt" ./hello-world.hs)
+    (run "common-types.txt" ./common-types.hs)
   ]

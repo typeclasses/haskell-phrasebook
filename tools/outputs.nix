@@ -19,4 +19,5 @@ in
   linkFarm "haskell-phrasebook-outputs" [
     (run "hello-world.txt" ../hello-world.hs)
     (run "common-types.txt" ../common-types.hs)
+    (run "variables.txt" ../variables.hs)
   ]

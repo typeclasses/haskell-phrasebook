@@ -1,9 +1,0 @@
-#! /usr/bin/env nix-shell
-#! nix-shell -i bash
-#! nix-shell -p nix rsync
-
-set -eufo pipefail
-
-outputs="$(nix-build --attr outputs --no-out-link)"
-
-rsync --copy-links --recursive --chmod=ugo=rwX "$outputs/" ./

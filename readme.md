@@ -4,9 +4,9 @@ https://typeclasses.com/phrasebook
 
 ## Outputs
 
-In addition to the code examples themselves, the results from running the examples are also included in this repository. An example's output is typically given the same name as its source file, with the extension changed; for example, the output of `hello-world.hs` is given by the file `hello-world.txt`.
+In addition to the code examples themselves, the results from running the examples are also included in this repository, in the `outputs` directory. An example's output is typically given the same name as its source file, with the extension changed; for example, the output of `hello-world.hs` is given by the file `outputs/hello-world.txt`.
 
-When any source code or dependency versions change, run `./generate-outputs`. This script runs all of the examples and updates the output files.
+When any source code or dependency versions change, run `./tools/generate-outputs`. This script runs all of the examples and updates the output files.
 
 ## Using Nix shell
 
@@ -15,7 +15,7 @@ When any source code or dependency versions change, run `./generate-outputs`. Th
 2. Enter a Nix shell:
 
     ```
-    $ nix-shell --pure
+    $ nix-shell --pure tools/shell.nix
     ```
 
 3. Within the Nix shell, you have all of the dependencies required by the examples in the Phrasebook. For example, you can run commands like `runhaskell` and `ghcid`:

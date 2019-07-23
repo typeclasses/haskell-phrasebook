@@ -6,13 +6,10 @@ rec {
 
   inherit (pkgs) callPackage haskellPackages;
 
-  ghc = haskellPackages.ghcWithPackages (p: [
-    p.bytestring
-    p.text
-  ]);
+  haskell = callPackage ./haskell.nix {};
 
   inherit (haskellPackages) ghcid;
 
-  outputs = callPackage ./outputs.nix { inherit ghc; };
+  outputs = callPackage ./outputs.nix { inherit haskell; };
 
 }

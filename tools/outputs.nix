@@ -1,4 +1,4 @@
-{ runCommand, linkFarm, ghc }:
+{ runCommand, linkFarm, haskell }:
 
 let
   run = name: hsFile:
@@ -6,7 +6,7 @@ let
       inherit name;
       path = runCommand "phrasebook-output-${name}.txt"
         {
-          buildInputs = [ ghc ];
+          buildInputs = [ haskell ];
           inherit hsFile;
         }
         ''
@@ -20,4 +20,5 @@ in
     (run "hello-world.txt" ../hello-world.hs)
     (run "common-types.txt" ../common-types.hs)
     (run "variables.txt" ../variables.hs)
+    (run "hashing.txt" ../hashing.hs)
   ]

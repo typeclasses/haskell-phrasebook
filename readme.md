@@ -33,7 +33,7 @@ Only the standard output stream (`stdout`) is captured in the output files. Any 
 
 ## Nix dependency versions
 
-Run `./update-versions` to update the dependency hashes in `versions.json` to their latest commits. The JSON data is then used by `versions.nix`. This system is described in Vaibhav Sagar's blog post, [*Quick and Easy Nixpkgs Pinning*][vaibhav].
+Run `./tools/update-versions` to update the dependency hashes in `tools/versions.json` to their latest commits. The JSON data is then used by `tools/versions.nix`. This system is described in Vaibhav Sagar's blog post, [*Quick and Easy Nixpkgs Pinning*][vaibhav].
 
   [install]:
     https://nixos.org/nix/manual/#chap-installation

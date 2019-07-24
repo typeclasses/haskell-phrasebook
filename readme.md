@@ -17,7 +17,7 @@ Only the standard output stream (`stdout`) is captured in the output files. Any 
 2. Enter a Nix shell:
 
     ```
-    $ nix-shell --pure tools/shell.nix
+    $ nix-shell tools/shell.nix
     ```
 
 3. Within the Nix shell, you have all of the dependencies required by the examples in the Phrasebook. For example, you can run commands like `runhaskell` and `ghcid`:

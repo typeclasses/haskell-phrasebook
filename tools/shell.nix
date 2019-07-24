@@ -1,4 +1,4 @@
 let
-  inherit (import ./default.nix) pkgs ghc ghcid;
+  inherit (import ./default.nix) pkgs haskell ghcid;
 in
-  pkgs.mkShell { buildInputs = [ ghc ghcid ]; }
+  pkgs.mkShell { buildInputs = [ haskell ghcid ]; }

@@ -18,9 +18,9 @@ in
 
   linkFarm "haskell-phrasebook-outputs" [
     (run "common-types.txt" ../common-types.hs)
+    (run "for-loops.txt" ../for-loops.hs)
     (run "hashing.txt" ../hashing.hs)
     (run "hello-world.txt" ../hello-world.hs)
-    (run "for-loops.txt" ../for-loops.hs)
     (run "threads.txt" ../threads.hs)
     (run "variables.txt" ../variables.hs)
   ]

@@ -6,6 +6,8 @@ This repository contains only the code files; you may find them useful if you wa
 
 ## Using Nix shell
 
+You do not *have to* use Nix to run these Haskell programs, but you may find it convenient.
+
 1. [Install Nix][install]
 
 2. Enter a Nix shell:
@@ -35,13 +37,18 @@ Only the standard output stream (`stdout`) is captured in the output files. Any 
 
 ## Nix dependency versions
 
-Run `./tools/update-versions` to update the dependency hashes in `tools/versions.json` to their latest commits. The JSON data is then used by `tools/versions.nix`. This system is described in Vaibhav Sagar's blog post, [*Quick and Easy Nixpkgs Pinning*][vaibhav].
+All of the Nix tools are configured to use a specific version of [the Nix package set][nixpkgs] to ensure that the code works the same in all environments. This version is specified in `tools/versions.json`.
+
+You can run `./tools/update-versions` to update the dependency hashes in `tools/versions.json` to their latest commits. The JSON data is then used by `tools/versions.nix`. This system is described in Vaibhav Sagar's blog post, [*Quick and Easy Nixpkgs Pinning*][vaibhav].
 
   [phrasebook]:
     https://typeclasses.com/phrasebook
 
   [install]:
     https://nixos.org/nix/manual/#chap-installation
+
+  [nixpkgs]:
+    The *Phrasebook* itself can be found on [Type Classes][phrasebook]
 
   [vaibhav]:
     https://vaibhavsagar.com/blog/2018/05/27/quick-easy-nixpkgs-pinning/

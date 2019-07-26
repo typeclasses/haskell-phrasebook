@@ -48,7 +48,7 @@ You can run `./tools/update-versions` to update the dependency hashes in `tools/
     https://nixos.org/nix/manual/#chap-installation
 
   [nixpkgs]:
-    The *Phrasebook* itself can be found on [Type Classes][phrasebook]
+    https://github.com/nixos/nixpkgs/
 
   [vaibhav]:
     https://vaibhavsagar.com/blog/2018/05/27/quick-easy-nixpkgs-pinning/

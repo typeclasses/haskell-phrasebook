@@ -1,2 +1,2 @@
-Task A timed out after one second
-Task B completed in half a second
+Task A: Gave up after one second
+Task B: Completed in half a second

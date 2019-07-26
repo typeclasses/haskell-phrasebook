@@ -10,18 +10,18 @@ import Control.Concurrent.STM.TVar
 
 main =
   do
-    timeout <- atomically (newTVar False)
-    forkIO $
-      do
-        threadDelay 1_000_000
-        atomically (writeTVar timeout True)
-
     result <- atomically (newTVar Nothing)
     forkIO $
       do
         threadDelay 2_000_000
         atomically (writeTVar result (Just
             "Task A: Completed in two seconds"))
+
+    timeout <- atomically (newTVar False)
+    forkIO $
+      do
+        threadDelay 1_000_000
+        atomically (writeTVar timeout True)
 
     message <- atomically $
       asum
@@ -38,18 +38,18 @@ main =
 
     ----
 
-    timeout <- atomically (newTVar False)
-    forkIO $
-      do
-        threadDelay 1_000_000
-        atomically (writeTVar timeout True)
-
     result <- atomically (newTVar Nothing)
     forkIO $
       do
         threadDelay (500_000)
         atomically (writeTVar result (Just
             "Task B: Completed in half a second"))
+
+    timeout <- atomically (newTVar False)
+    forkIO $
+      do
+        threadDelay 1_000_000
+        atomically (writeTVar timeout True)
 
     message <- atomically $
       asum

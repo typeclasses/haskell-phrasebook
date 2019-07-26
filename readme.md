@@ -2,7 +2,7 @@
 
 *The Haskell Phrasebook* is a free quick-start Haskell guide comprised of a sequence of small annotated programs. It provides a cursory overview of selected Haskell features, jumping-off points for further reading, and recommendations to help get you writing programs as soon as possible.
 
-This repository contains only the code examples, which you may find useful if you want to follow along while reading [typeclasses.com/phrasebook][phrasebook].
+This repository contains only the code files; you may find them useful if you want to follow along while reading the *Phrasebook*, which can be found at [typeclasses.com/phrasebook][phrasebook].
 
 ## Using Nix shell
 

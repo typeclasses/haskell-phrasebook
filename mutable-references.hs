@@ -1,6 +1,8 @@
 import Control.Monad.STM
 import Control.Concurrent.STM.TVar
 
+import Data.Foldable (for_)
+
 main =
   do
     a <- atomically (newTVar 3)
@@ -34,8 +36,8 @@ main =
               writeTVar ref2 x1
 
     increment a
-    increment a
-    increment b
+    for_ [1..5] $ \_ ->
+        increment b
     printVars "incremented"
 
     swap a b

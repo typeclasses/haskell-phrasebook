@@ -21,6 +21,7 @@ in
     (run "for-loops.txt" ../for-loops.hs)
     (run "hashing.txt" ../hashing.hs)
     (run "hello-world.txt" ../hello-world.hs)
+    (run "mutable-references.txt" ../mutable-references.hs)
     (run "threads.txt" ../threads.hs)
     (run "timeouts.txt" ../timeouts.hs)
     (run "variables.txt" ../variables.hs)

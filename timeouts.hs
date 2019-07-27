@@ -1,7 +1,5 @@
 {-# LANGUAGE LambdaCase, NumericUnderscores #-}
 
-module Main where
-
 import Data.Foldable (asum)
 
 import Control.Concurrent (forkIO, threadDelay)

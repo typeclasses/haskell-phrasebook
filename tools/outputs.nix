@@ -24,5 +24,6 @@ in
     (run "mutable-references.txt" ../mutable-references.hs)
     (run "threads.txt" ../threads.hs)
     (run "timeouts.txt" ../timeouts.hs)
+    (run "transactions.txt" ../transactions.hs)
     (run "variables.txt" ../variables.hs)
   ]

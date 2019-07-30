@@ -41,7 +41,6 @@ main =
                 atomically $
                   asum
                     [ do
-                        check (sender /= recipient)
                         modifyTVar' sender (\x -> x - amount)
                         modifyTVar' recipient (\x -> x + amount)
                         readTVar sender >>= \x -> check (x >= 0)

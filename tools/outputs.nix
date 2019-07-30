@@ -26,7 +26,7 @@ in
     (run "hashing.txt" ../hashing.hs)
     (run "hello-world.txt" ../hello-world.hs)
     (run "mutable-references.txt" ../mutable-references.hs)
-    (run "threads.txt" ../threads.hs)
+    (run' "threads.txt" ../threads.hs { sed = ["s!^fork.*$!...!"]; })
     (run "timeouts.txt" ../timeouts.hs)
     (run' "transactions.txt" ../transactions.hs { sed = ["s!\\[.*\\]!...!"]; })
     (run "variables.txt" ../variables.hs)

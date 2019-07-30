@@ -42,8 +42,10 @@ main =
                   asum
                     [ do
                         modifyTVar' sender (\x -> x - amount)
-                        modifyTVar' recipient (\x -> x + amount)
                         readTVar sender >>= \x -> check (x >= 0)
+
+                        modifyTVar' recipient (\x -> x + amount)
+
                     , return ()
                     ]
 

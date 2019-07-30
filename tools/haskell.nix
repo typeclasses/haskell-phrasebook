@@ -6,4 +6,5 @@ haskellPackages.ghcWithPackages (p: [
   p.pipes
   p.stm
   p.text
+  p.time
 ])

@@ -1,14 +1,15 @@
-import Control.Concurrent (forkIO, threadDelay)
-import Control.Monad (forever, when)
-import Data.Foldable (asum, for_)
-import Data.Traversable (for)
-import System.IO
-
 import Control.Monad.STM
 import Control.Concurrent.STM.TVar
 
+import Control.Concurrent (forkIO, threadDelay)
+
 import System.Random.MWC (createSystemRandom, uniformR)
+
 import qualified Data.Sequence as Seq
+
+import Control.Monad (forever, when)
+import Data.Foldable (asum, for_)
+import Data.Traversable (for)
 
 main =
   do
@@ -24,12 +25,15 @@ main =
             i <- uniformR (1, Seq.length accountSeq) rng
             return (Seq.index accountSeq (i - 1))
 
-    for_ [1..20] $ \_ ->
+    for_ [1..500] $ \_ ->
         forkIO $
           do
             rng <- createSystemRandom
             forever $
               do
+                d <- uniformR (10, 50) rng
+                threadDelay d
+
                 sender    <- randomAccount rng
                 recipient <- randomAccount rng
 
@@ -53,5 +57,5 @@ main =
       do
         threadDelay 500000
         balances <- atomically (for accountList readTVar)
-        hPutStrLn stderr (show balances)
+        putStrLn (show balances)
         putStrLn ("Total: " ++ show (sum balances))

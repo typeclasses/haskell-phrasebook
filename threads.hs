@@ -6,7 +6,7 @@ import System.IO
 
 main =
   do
-    hSetBuffering stderr LineBuffering
+    hSetBuffering stdout LineBuffering
 
     tasksCompleted <- atomically (newTVar 0)
 
@@ -14,7 +14,7 @@ main =
         task x =
           do
             for_ [1..3] $ \i ->
-                hPutStrLn stderr (x ++ ": " ++ show i)
+                putStrLn (x ++ ": " ++ show i)
             atomically $
                 modifyTVar' tasksCompleted (+ 1)
 

@@ -1,7 +1,11 @@
-{ runCommand, linkFarm, haskell }:
+{ runCommand, linkFarm, haskell, lib }:
 
 let
-  run = name: hsFile:
+  inherit (lib) concatMapStringsSep escapeShellArg;
+
+  run = name: hsFile: run' name hsFile {};
+
+  run' = name: hsFile: { sed ? [] }:
     {
       inherit name;
       path = runCommand "phrasebook-output-${name}.txt"
@@ -10,7 +14,7 @@ let
           inherit hsFile;
         }
         ''
-          runhaskell "$hsFile" > $out
+          runhaskell "$hsFile" ${concatMapStringsSep " " (x: "| sed -e ${escapeShellArg x}") sed} > $out
         '';
     };
 
@@ -24,6 +28,6 @@ in
     (run "mutable-references.txt" ../mutable-references.hs)
     (run "threads.txt" ../threads.hs)
     (run "timeouts.txt" ../timeouts.hs)
-    (run "transactions.txt" ../transactions.hs)
+    (run' "transactions.txt" ../transactions.hs { sed = ["s!\\[.*\\]!...!"]; })
     (run "variables.txt" ../variables.hs)
   ]

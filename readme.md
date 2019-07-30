@@ -33,7 +33,7 @@ In addition to the code examples themselves, the results from running the exampl
 
 When any source code or dependency versions change, run `./tools/generate-outputs`. This script runs all of the examples and updates the output files.
 
-Only the standard output stream (`stdout`) is captured in the output files. Any examples that include nondeterministic behavior (such as `threads.hs`) print the nondeterministic portion of their output to the standard error stream (`stderr`) to avoid including non-repeatable results in the output files.
+Any examples that include nondeterministic behavior (such as `threads.hs`) have the nondeterministic portion of their output redacted as "..." to avoid including non-repeatable results in the output files.
 
 ## Nix dependency versions
 

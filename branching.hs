@@ -1,5 +1,13 @@
 import Data.Time
 
+data ServicePlan = Free | Monthly | Annual
+
+billAmount plan =
+  case plan of
+    Free    -> 0
+    Monthly -> 5
+    Annual  -> billAmount Monthly * 12
+
 main =
   do
     let i = 2
@@ -8,14 +16,14 @@ main =
         1 -> putStrLn "one"
         2 -> putStrLn "two"
         3 -> putStrLn "three"
-        otherwise -> putStrLn "This is an Arby's"
+        _ -> putStrLn "unknown number."
 
     now <- getZonedTime
-    case (dayOfWeek (localDay (zonedTimeToLocalTime now))) of
-        Saturday -> putStrLn "It's the weekend"
-        Sunday   -> putStrLn "It's the weekend"
-        _        -> putStrLn "It's a weekday"
+    case
+      (todHour (localTimeOfDay (zonedTimeToLocalTime now)) < 12) of
+      True  -> putStrLn "It's before noon"
+      False -> putStrLn "It's after noon"
 
-    case (todHour (localTimeOfDay (zonedTimeToLocalTime now)) < 12) of
-        True  -> putStrLn "It's before noon"
-        False -> putStrLn "It's after noon"
+
+
+

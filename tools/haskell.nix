@@ -1,9 +1,9 @@
 { haskellPackages }:
 
 haskellPackages.ghcWithPackages (p: [
-  p.bytestring
+  p.containers
+  p.mwc-random
   p.hashable
-  p.pipes
   p.stm
   p.text
   p.time

@@ -23,6 +23,7 @@ in
   linkFarm "haskell-phrasebook-outputs" [
     (run' "branching.txt" ../branching.hs { sed = ["s!^It's .* noon$!It's ... noon!"]; })
     (run "common-types.txt" ../common-types.hs)
+    (run "crypto-hashing.txt" ../crypto-hashing.hs)
     (run "for-loops.txt" ../for-loops.hs)
     (run "hashing.txt" ../hashing.hs)
     (run "hello-world.txt" ../hello-world.hs)

@@ -24,7 +24,7 @@ You do not *have to* use Nix to run these Haskell programs, but you may find it 
     ```
     
     ```
-    $ ghcid --command 'ghci hello-world.hs'
+    $ ghcid --command 'ghci hello-world.hs' --test ':main'
     ``` 
 
 ## Outputs

@@ -7,7 +7,7 @@ import System.Random.MWC (createSystemRandom, uniformR)
 
 import qualified Data.Sequence as Seq
 
-import Control.Monad (forever, when)
+import Control.Monad (forever)
 import Data.Foldable (asum, for_)
 import Data.Traversable (for)
 

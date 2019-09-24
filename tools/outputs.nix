@@ -27,7 +27,7 @@ in
         (run "hashing.txt" ../hashing.hs {})
         (run "hello-world.txt" ../hello-world.hs {})
         (run "mutable-references.txt" ../mutable-references.hs {})
-        (run "representing-enums.txt" ../representing-enums.hs {})
+        (run "invert.txt" ../invert.hs {})
         (run "threads.txt" ../threads.hs { sed = ["s!^fork.*$!...!"]; })
         (run "timeouts.txt" ../timeouts.hs {})
         (run "transactions.txt" ../transactions.hs { sed = ["s!\\[.*\\]!...!"]; })

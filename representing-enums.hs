@@ -26,12 +26,12 @@ data Rep a b =
     }
 
 genumRep :: (GEnum a, Ord b) => (a -> b) -> Rep a b
-genumRep encode =
+genumRep f =
   let
-    reverseMap = foldMap (\a -> Map.singleton (encode a) a) genum
+    reverseMap = foldMap (\a -> Map.singleton (f a) a) genum
   in
     Rep
-      { encode = encode
+      { encode = \a -> f a
       , decode = \b -> Map.lookup b reverseMap
       }
 

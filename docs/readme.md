@@ -43,7 +43,7 @@ You can run `./tools/update-versions` to update the dependency hashes in `tools/
 
 ## License
 
-The code in this repository is offered under the Creative Commons [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license, which you can read in the [license.txt] file.
+The code in this repository is offered under the Creative Commons [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license, which you can read in the [license.txt](license.txt) file.
 
 You are free to:
 

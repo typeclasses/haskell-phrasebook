@@ -2,13 +2,13 @@
 
 *The Haskell Phrasebook* is a free quick-start Haskell guide comprised of a sequence of small annotated programs. It provides a cursory overview of selected Haskell features, jumping-off points for further reading, and recommendations to help get you writing programs as soon as possible.
 
-This repository contains only the code files; you may find them useful if you want to follow along while reading the *Phrasebook*, which can be found at [typeclasses.com/phrasebook][phrasebook].
+This repository contains only the code files; you may find them useful if you want to follow along while reading the *Phrasebook*, which can be found at [typeclasses.com/phrasebook](https://typeclasses.com/phrasebook).
 
 ## Using Nix shell
 
 You do not *have to* use Nix to run these Haskell programs, but you may find it convenient.
 
-1. [Install Nix][install]
+1. [Install Nix](https://nixos.org/nix/manual/#chap-installation)
 
 2. Enter a Nix shell:
 
@@ -37,18 +37,6 @@ Any examples that include nondeterministic behavior (such as `threads.hs`) have 
 
 ## Nix dependency versions
 
-All of the Nix tools are configured to use a specific version of [the Nix package set][nixpkgs] to ensure that the code works the same in all environments. This version is specified in `tools/versions.json`.
+All of the Nix tools are configured to use a specific version of [the Nix package set](https://github.com/nixos/nixpkgs/) to ensure that the code works the same in all environments. This version is specified in `tools/versions.json`.
 
-You can run `./tools/update-versions` to update the dependency hashes in `tools/versions.json` to their latest commits. The JSON data is then used by `tools/versions.nix`. This system is described in Vaibhav Sagar's blog post, [*Quick and Easy Nixpkgs Pinning*][vaibhav].
-
-  [phrasebook]:
-    https://typeclasses.com/phrasebook
-
-  [install]:
-    https://nixos.org/nix/manual/#chap-installation
-
-  [nixpkgs]:
-    https://github.com/nixos/nixpkgs/
-
-  [vaibhav]:
-    https://vaibhavsagar.com/blog/2018/05/27/quick-easy-nixpkgs-pinning/
+You can run `./tools/update-versions` to update the dependency hashes in `tools/versions.json` to their latest commits. The JSON data is then used by `tools/versions.nix`. This system is described in Vaibhav Sagar's blog post, [*Quick and Easy Nixpkgs Pinning*](https://vaibhavsagar.com/blog/2018/05/27/quick-easy-nixpkgs-pinning/).

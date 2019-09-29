@@ -3,4 +3,8 @@
 
 @import "{{ site.theme }}";
 
-a:hover { font-weight: normal; }
+a { &:active, &:hover { font-weight: normal; } }
+
+h1 a { font-weight: bold; }
+
+p a { text-decoration: underline; }

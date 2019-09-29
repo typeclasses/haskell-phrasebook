@@ -40,3 +40,17 @@ Any examples that include nondeterministic behavior (such as `threads.hs`) have 
 All of the Nix tools are configured to use a specific version of [the Nix package set](https://github.com/nixos/nixpkgs/) to ensure that the code works the same in all environments. This version is specified in `tools/versions.json`.
 
 You can run `./tools/update-versions` to update the dependency hashes in `tools/versions.json` to their latest commits. The JSON data is then used by `tools/versions.nix`. This system is described in Vaibhav Sagar's blog post, [*Quick and Easy Nixpkgs Pinning*](https://vaibhavsagar.com/blog/2018/05/27/quick-easy-nixpkgs-pinning/).
+
+## License
+
+The code in this repository is offered under the Creative Commons [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license, which you can read in the [license.txt] file.
+
+You are free to:
+
+  * **Share** — copy and redistribute the material in any medium or format
+  * **Adapt** — remix, transform, and build upon the material
+
+Under the following terms:
+
+  * **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests that we endorse you or your use.
+  * **NonCommercial** — You may not use the material for commercial purposes.

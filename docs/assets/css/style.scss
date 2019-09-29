@@ -5,8 +5,8 @@
 
 body { background-color: #fcf9f4; }
 
-a { &:active, &:hover { font-weight: normal; } }
+a { &, &:active, &:hover, &:link, &:visited { font-weight: normal; } }
 
-h1 a { &, &:active, &:hover { font-weight: bold; } }
+h1 a { &, &:active, &:hover, &:link, &:visited { font-weight: bold; } }
 
 p a { text-decoration: underline; }

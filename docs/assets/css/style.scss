@@ -5,6 +5,8 @@
 
 a { &:active, &:hover { font-weight: normal; } }
 
-h1 a { font-weight: bold; }
+h1 a { &, &:active, &:hover { font-weight: bold; } }
 
 p a { text-decoration: underline; }
+
+.view a small { text-decoration: none; }

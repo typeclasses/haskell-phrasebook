@@ -3,6 +3,8 @@
 
 @import "{{ site.theme }}";
 
+body { background-color: #fcf9f4; }
+
 a { &:active, &:hover { font-weight: normal; } }
 
 h1 a { &, &:active, &:hover { font-weight: bold; } }

@@ -4,7 +4,7 @@
 
 This repository contains only the code files; you may find them useful if you want to follow along while reading the *Phrasebook*, which can be found at [typeclasses.com/phrasebook](https://typeclasses.com/phrasebook).
 
-We love to hear any requests or ideas for how to expand or improve the Phrasebook! Please see the [contributor guide](contributing).
+We love to hear any requests or ideas for how to expand or improve the Phrasebook! Please see the [contributor guide](https://typeclasses.github.io/haskell-phrasebook/contributing).
 
 ## Using Nix shell
 
@@ -24,10 +24,10 @@ You do not *have to* use Nix to run these Haskell programs, but you may find it 
     $ runhaskell hello-world.hs
     hello world
     ```
-    
+
     ```
     $ ghcid --command 'ghci hello-world.hs' --test ':main'
-    ``` 
+    ```
 
 ## Outputs
 

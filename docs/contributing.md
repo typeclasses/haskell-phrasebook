@@ -12,6 +12,14 @@ We're delighted by contributions of all sizes:
 
 **You do not need to be a Haskell expert to contribute.** Give us your thoughts, your hopes, your confusions, your code, and its imperfections; we'll help polish it up.
 
+## How to contribute code with GitHub
+
+If you are a seasoned GitHub user, you may not need to read this section. If you are unfamiliar with pull requests but want that sweet [Hacktoberfest](https://hacktoberfest.digitalocean.com/) t-shirt, read on:
+
+On [the project's main page](https://github.com/typeclasses/haskell-phrasebook), click the "Create new file" button. If you don't have any code, just enter a file name for the example you'd like to see (then once the pull request is open, we can talk about what should go there). Click the "Propose new file" button, then on the next screen the "Create pull request" button.
+
+A pull request includes a discussion thread where we can talk about the code. If necessary you can continue making revisions to the file after you open the pull request. What you submit can be a work in progress.
+
 ## Content guidelines
 
 Each Phrasebook example should define a `main` action which prints something that demonstrates the program's behavior. Aim for small examples that are just long enough to illustrate one idea.

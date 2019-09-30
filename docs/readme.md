@@ -9,3 +9,5 @@ This repository contains only the code files; you may find them useful if you wa
 **Build tools** -- See the [build tools](https://typeclasses.github.io/haskell-phrasebook/build-tools) page for information on how to build and run the Phrasebook examples.
 
 **License** -- The code in this repository is offered under the Creative Commons [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license, which allows free non-commercial use with attribution. You can read the full text in the [license.txt](license.txt) file.
+
+**Support** -- You can help support this community resource with funding via [Liberapay](https://liberapay.com/typeclasses) or by becoming a member of [Type Classes](https://typeclasses.com) (which gives you access to much more of our writing).

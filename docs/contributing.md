@@ -51,6 +51,6 @@ Use language extensions as necessary, but not to excess.
 
 Don't include quite as many type signatures as you might in typical code.
 
-Use the `($)` operator for multi-line arguments (see the [For loops](https://typeclasses.com/phrasebook/for-loops) page for numerous examples of this). Do not use the `BlockOperators` extension. For single-line expressions, use parentheses.
+The `($)` operator tends to be an obstacle for unpracticed Haskell readers, so prefer parentheses. Do use `($)` to avoid parenthesizing [multi-line arguments](https://typeclasses.com/phrasebook/for-loops). We do not want to use the `BlockOperators` extension yet.
 
 The maximum line length is 68 characters. (This constraint is imposed by the format of the website.)

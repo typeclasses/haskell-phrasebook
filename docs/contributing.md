@@ -31,7 +31,7 @@ The [Phrasebook](https://typeclasses.com/phrasebook) itself includes explanation
 
 The Phrasebook is run by [Type Classes](https://typeclasses.com/company), which consists of [Julie Moronuki](https://github.com/argumatronic/) and [Chris Martin](https://github.com/chris-martin/). This project serves as our primary introduction for Haskell newcomers, and we want contributors to care about helping all people who may read the Phrasebook.
 
-The aim of the Phrasebook naturally invites comparisons between Haskell and other languages; we will not tolerate needless disparagement of any programming ecosystems. We love learning about the differences between languages, and we obviously have our own preferences among them, but undue emphasis on value judgements tends to incidentally insult entire degrees and careers.
+The nature of the Phrasebook invites comparisons between Haskell and other languages; we will not tolerate needless disparagement of any programming ecosystems. We love learning about the differences between languages, and we obviously have our own preferences among them, but undue emphasis on value judgements tends to incidentally insult entire degrees and careers.
 
 ## License
 

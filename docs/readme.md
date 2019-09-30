@@ -4,8 +4,8 @@
 
 This repository contains only the code files; you may find them useful if you want to follow along while reading the *Phrasebook*, which can be found at [typeclasses.com/phrasebook](https://typeclasses.com/phrasebook).
 
-We love to hear any requests or ideas for how to expand or improve the Phrasebook! Please see the [contributor guide](https://typeclasses.github.io/haskell-phrasebook/contributing).
+**Contributing** -- We love to hear any requests or ideas for how to expand or improve the Phrasebook! Please see the [contributor guide](https://typeclasses.github.io/haskell-phrasebook/contributing).
 
-See the [build tools](https://typeclasses.github.io/haskell-phrasebook/build-tools) page for information on how to build and run the Phrasebook examples.
+**Build tools** -- See the [build tools](https://typeclasses.github.io/haskell-phrasebook/build-tools) page for information on how to build and run the Phrasebook examples.
 
-The code in this repository is offered under the Creative Commons [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license, which allows free non-commercial use with attribution. You can read the full text in the [license.txt](license.txt) file.
+**License** -- The code in this repository is offered under the Creative Commons [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license, which allows free non-commercial use with attribution. You can read the full text in the [license.txt](license.txt) file.

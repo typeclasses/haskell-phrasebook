@@ -1,0 +1,46 @@
+start: 1000
+start: 1001
+start: 1002
+start: 1003
+start: 1004
+tictoc: 1
+tictoc: 2
+tictoc: 3
+tictoc: 4
+finish: 1001, result: 1002001
+start: 1005
+tictoc: 5
+tictoc: 6
+tictoc: 7
+tictoc: 8
+finish: 1002, result: 1004004
+start: 1006
+tictoc: 9
+finish: 1000, result: 1000000
+start: 1007
+tictoc: 10
+finish: 1003, result: 1006009
+start: 1008
+tictoc: 11
+tictoc: 12
+finish: 1004, result: 1008016
+start: 1009
+tictoc: 13
+finish: 1005, result: 1010025
+start: 1010
+tictoc: 14
+tictoc: 15
+tictoc: 16
+finish: 1006, result: 1012036
+tictoc: 17
+tictoc: 18
+tictoc: 19
+finish: 1007, result: 1014049
+finish: 1010, result: 1020100
+tictoc: 20
+tictoc: 21
+tictoc: 22
+finish: 1008, result: 1016064
+tictoc: 23
+tictoc: 24
+finish: 1009, result: 1018081

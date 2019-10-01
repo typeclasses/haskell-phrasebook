@@ -1,0 +1,50 @@
+import Data.Time.Calendar
+
+
+data Rank = R2 | R3 | R4 | R5 | R6 | R7 | R8 | R9 | R10 | J | Q | K | A
+            deriving (Bounded, Enum, Eq, Ord)
+
+-- to be able to print it
+instance Show Rank where
+  show R2  = "2"
+  show R3  = "3"
+  show R4  = "4"
+  show R5  = "5"
+  show R6  = "6"
+  show R7  = "7"
+  show R8  = "8"
+  show R9  = "9"
+  show R10 = "10"
+  show J   = "J"
+  show Q   = "Q"
+  show K   = "K"
+  show A   = "A"
+
+
+-- defining Enum instance for MyType
+data MyType = Foo | Bar | Baz 
+
+
+instance Show MyType where
+  show Foo  = "Foo"
+  show Bar  = "Bar"
+  show Baz  = "Baz"
+
+
+instance Enum MyType where
+ toEnum 0 = Foo
+ toEnum 1 = Bar
+ toEnum 2 = Baz
+
+ fromEnum Foo = 0
+ fromEnum Bar = 1
+ fromEnum Baz = 2
+
+
+main =
+  do
+    putStrLn (show [3 .. 8])
+    putStrLn (show ['a' .. 'z'])
+    putStrLn (show [Tuesday .. Friday])
+    putStrLn (show [R3 .. A])
+    putStrLn (show [Foo .. Baz])

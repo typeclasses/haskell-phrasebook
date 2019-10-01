@@ -5,6 +5,11 @@ f x = (x, x + 1)
 g :: Int -> (Int, Int)
 g x = (x+1, x)
 
+myDouble  x = (if x > 145 then x else x*2) + 1  
+myDouble' x = if x > 100  
+                        then x  
+                        else x*2 
+
 main =
   do
     let (a, b) = vals
@@ -16,6 +21,15 @@ main =
     
     let (d, _) = g 4
     putStrLn (show d)
+    
+    let y = myDouble 1
+    putStrLn (show y)
+    let y' = myDouble 146
+    putStrLn (show y')
+    let z = myDouble' 1
+    putStrLn (show z)
+    let z = myDouble' 146
+    putStrLn (show z')
  
 -- CURRYING:
 -- f :: X ->  Y ->  Z -> A     

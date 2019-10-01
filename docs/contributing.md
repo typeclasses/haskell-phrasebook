@@ -14,6 +14,11 @@ We're delighted by contributions of all sizes:
 
 If you've been frustrated with Haskell but are willing to show up with a constructive attitude, we would like to hear what problems you've had and talk about how this guide could help. If you've done something you're proud of that fits the Phrasebook, you're welcome to come show it off.
 
+If you'd like to contribute and need inspiration, try these sources for topic ideas:
+
+  * Our GitHub issues with the [Hacktoberfest label](https://github.com/typeclasses/haskell-phrasebook/issues?q=is%3Aissue+is%3Aopen+label%3Ahacktoberfest).
+  * [Go by Example](https://gobyexample.com/) and [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html).
+
 ## How to contribute code with GitHub
 
 If you are a seasoned GitHub user, you may not need to read this section. If you are unfamiliar with pull requests but want that sweet [Hacktoberfest](https://hacktoberfest.digitalocean.com/) t-shirt, read on:
@@ -24,7 +29,7 @@ A pull request includes a discussion thread where we can talk about the code. If
 
 ## Content guidelines
 
-Aim for small examples that are just long enough to illustrate one idea. The Phrasebook is modeled after [Go by Example](https://gobyexample.com/) and [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html); if you'd like to contribute and need inspiration, you can look at those sources for topic ideas.
+Aim for small examples that are just long enough to illustrate one idea.
 
 Each page of the Phrasebook demonstrates a particular thing that someone who doesn't know Haskell might be wondering how to do. For example:
 
@@ -40,6 +45,8 @@ We believe that Haskell is not so different from any other language that learnin
 The Phrasebook is run by [Type Classes](https://typeclasses.com/company), which consists of [Julie Moronuki](https://github.com/argumatronic/) and [Chris Martin](https://github.com/chris-martin/). This project serves as our primary introduction for Haskell newcomers, and we want contributors to care about helping all people who may read the Phrasebook.
 
 The nature of the Phrasebook invites comparisons between Haskell and other languages; we will not tolerate needless disparagement of any programming ecosystems. We love learning about the differences between languages, and we obviously have our own preferences among them, but undue emphasis on value judgements tends to incidentally insult entire degrees and careers.
+
+For more on what we're about, please see our Type Classes statement of [values](https://typeclasses.com/values).
 
 ## License
 

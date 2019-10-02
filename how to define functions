@@ -14,9 +14,13 @@ greet name = "hello" ++ " " ++ name
 
 
 myDouble  x = (if x > 145 then x else x*2) + 1  
-myDouble' x = if x > 100  
+myDouble' x = if x > 145  
                         then x  
                         else x*2 
+
+-- show how to define functions using lambdas
+notLambda = \x y -> x + y
+
 
 main =
   do
@@ -41,7 +45,16 @@ main =
     
     putStrLn (greet "world")
     putStrLn (greetings "world")
+    
+    let t = notLambda 1 2
+    putStrLn (show t)
+    
+    -- when lambdas are convenient
+    map (\x -> x*x) [1..5]
  
+ 
+ 
+------------------------------------------------------------
 -- CURRYING:
 -- f :: X ->  Y ->  Z -> A     
 -- is the same as

@@ -2,8 +2,16 @@ vals = (3, 7)
 
 f x = (x, x + 1)
 
-g :: Int -> (Int, Int)
+g :: (Num a) => a -> (a, a)
 g x = (x+1, x)
+
+-- to show that type signatures are optional 
+greetings :: String -> String
+greetings name = "hello" ++ " " ++ name
+
+greet name = "hello" ++ " " ++ name
+
+
 
 myDouble  x = (if x > 145 then x else x*2) + 1  
 myDouble' x = if x > 100  
@@ -30,6 +38,9 @@ main =
     putStrLn (show z)
     let z = myDouble' 146
     putStrLn (show z')
+    
+    putStrLn (greet "world")
+    putStrLn (greetings "world")
  
 -- CURRYING:
 -- f :: X ->  Y ->  Z -> A     

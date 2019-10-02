@@ -1,0 +1,70 @@
+import Data.Functor
+
+
+g :: _
+g = "greetings upon you"
+
+-- Compiler says:
+
+-- Found type wildcard ‘_’ standing for ‘[Char]’
+--     In the type signature: g :: _
+
+
+
+f :: _ -> Bool
+f x = not x
+
+-- Compiler says: 
+    
+-- Found type wildcard ‘_’ standing for ‘Bool’
+--    In the type signature: f :: _ -> Bool
+
+
+
+sum :: [Int] -> Int
+sum xs = foldr _f _x xs
+
+-- Compiler says:
+
+-- Found hole: _f :: Int -> Int -> Int
+--      Or perhaps ‘_f’ is mis-spelled, or not in scope
+--    • In the first argument of ‘foldr’, namely ‘_f’
+--      In the expression: foldr _f _x xs
+--     In an equation for ‘Main.sum’: Main.sum xs = foldr _f _x xs
+--    • Relevant bindings include
+--        xs :: [Int] (bound at filename.hs:22:5)
+--        sum :: [Int] -> Int (bound at filename.hs:22:1)
+--      Valid substitutions include
+--        undefined :: forall (a :: TYPE r).
+--                     GHC.Stack.Types.HasCallStack =>
+--                     a
+
+--        (*) :: forall a. Num a => a -> a -> a
+ 
+--        (+) :: forall a. Num a => a -> a -> a
+ 
+--  Found hole: _x :: Int
+--      Or perhaps ‘_x’ is mis-spelled, or not in scope
+--      In the second argument of ‘foldr’, namely ‘_x’
+--      In the expression: foldr _f _x xs
+--      In an equation for ‘Main.sum’: Main.sum xs = foldr _f _x xs
+--      Relevant bindings include
+--        xs :: [Int] (bound at filename.hs:22:5)
+--        sum :: [Int] -> Int (bound at filename.hs:22:1)
+
+
+
+-- One can use the compiler to get hints about some code
+data Tree a = Leaf a | Node (Tree a) (Tree a)
+
+instance Functor Tree where
+  fmap f (Leaf a)   = Leaf (f a)
+  fmap f (Node l r) = Node (_ f l) (_ f r)
+
+-- Compiler says:
+
+-- Found hole: _ :: (a -> b) -> Tree a -> Tree b
+-- Valid substitutions include
+--        fmap :: forall (f :: * -> *).
+--             Functor f =>
+--             forall a b. (a -> b) -> f a -> f b

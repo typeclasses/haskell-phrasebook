@@ -4,8 +4,6 @@ import Control.Monad
 import System.IO
 import Control.Concurrent
 import Control.Concurrent.STM
-import Data.Either
-import Control.Exception
 import System.Random
 
 tictoc :: TQueue String -> [Int] -> IO ()

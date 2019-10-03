@@ -50,7 +50,7 @@ main =
     putStrLn (show t)
     
     -- when lambdas are convenient
-    map (\x -> x*x) [1..5]
+    map (\x -> x*x - 1) [1..5]
  
  
  

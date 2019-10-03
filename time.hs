@@ -1,40 +1,26 @@
 import qualified Data.Time as Time
+import qualified Data.Time.Clock.POSIX as POSIX
 
 main = do
 
-  now <- Time.getZonedTime
+  now <- Time.getCurrentTime
   print now
 
-  let then_ = Time.ZonedTime
-        (Time.LocalTime
-          (Time.fromGregorian 2009 11 17)
-          (Time.TimeOfDay 20 34 58.651387237))
-        Time.utc
-  print then_
+  let render = Time.formatTime Time.defaultTimeLocale
+  putStrLn (render "%Y-%m-%d %H:%M:%S" now)
 
-  let (year, month, day) = Time.toGregorian
-        (Time.localDay (Time.zonedTimeToLocalTime then_))
-  print year
-  print month
-  print day
-  print (Time.todHour (Time.localTimeOfDay (Time.zonedTimeToLocalTime then_)))
-  print (Time.todMin (Time.localTimeOfDay (Time.zonedTimeToLocalTime then_)))
-  print (Time.todSec (Time.localTimeOfDay (Time.zonedTimeToLocalTime then_)))
-  print (Time.zonedTimeZone then_)
+  let soon = Time.addUTCTime 15 now
+  print soon
 
-  print (Time.dayOfWeek (Time.localDay (Time.zonedTimeToLocalTime then_)))
+  let parse = Time.parseTimeM False Time.defaultTimeLocale
+  y2038 <- parse "%Y-%m-%d %H:%M:%S" "2038-01-19 03:14:07"
+  print (y2038 :: Time.UTCTime)
 
-  print (Time.zonedTimeToUTC then_ < Time.zonedTimeToUTC now)
-  print (Time.zonedTimeToUTC then_ > Time.zonedTimeToUTC now)
-  print (Time.zonedTimeToUTC then_ == Time.zonedTimeToUTC now)
+  let delta = Time.diffUTCTime y2038 now
+  print delta
 
-  let diff = Time.diffUTCTime
-        (Time.zonedTimeToUTC now) (Time.zonedTimeToUTC then_)
-  print diff
+  posix <- POSIX.getPOSIXTime
+  print posix
 
-  print (Time.nominalDiffTimeToSeconds diff / 60 / 60)
-  print (Time.nominalDiffTimeToSeconds diff / 60)
-  print (Time.nominalDiffTimeToSeconds diff)
-
-  print (Time.addUTCTime diff (Time.zonedTimeToUTC then_))
-  print (Time.addUTCTime (-diff) (Time.zonedTimeToUTC then_))
+  print (POSIX.utcTimeToPOSIXSeconds now)
+  print (POSIX.posixSecondsToUTCTime posix)

@@ -11,6 +11,7 @@ main = do
 
   let soon = Time.addUTCTime 15 now
   print soon
+  print (now < soon)
 
   let parse = Time.parseTimeM False Time.defaultTimeLocale
   y2038 <- parse "%Y-%m-%d %H:%M:%S" "2038-01-19 03:14:07"

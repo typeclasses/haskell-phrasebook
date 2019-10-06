@@ -35,3 +35,5 @@ main = do
     putStrLn ("difference: "++ (show (Set.difference s' s)))
     putStrLn ("isSubset: " ++ (show (Set.isSubsetOf s s')))
 
+    let s1 = Set.insert 1 s'
+    putStrLn ("set after insert:" ++ show s1)

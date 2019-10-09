@@ -11,6 +11,11 @@ greetings name = "hello" ++ " " ++ name
 
 greet name = "hello" ++ " " ++ name
 
+-- pattern matching
+hello :: String -> String
+hello "Olafur"     = "hello, Olafur!"
+hello "Rocamadour" = "hey!"
+hello _            = "Nice to meet you!"
 
 
 myDouble  x = (if x > 145 then x else x*2) + 1  
@@ -20,6 +25,11 @@ myDouble' x = if x > 145
 
 -- show how to define functions using lambdas
 notLambda = \x y -> x + y
+
+-- recursion
+factorial :: (Intergal a) => a -> a
+factorial 0 = 1
+factorial n = n * factorial (n-1)
 
 
 main =
@@ -45,9 +55,15 @@ main =
     
     putStrLn (greet "world")
     putStrLn (greetings "world")
+    putStrLn (hello "Olafur")
+    putStrLn (hello "Rocamadour")
+    putStrLn (hello "Jane")
     
     let t = notLambda 1 2
     putStrLn (show t)
+    
+    let k = factorial 5
+    putStrLn (show k)
     
     -- when lambdas are convenient
     map (\x -> x*x - 1) [1..5]

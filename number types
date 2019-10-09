@@ -1,0 +1,70 @@
+-- The Num class provides several basic operations that are common to all numeric types 
+-- such as addition, subtraction, negation, multiplication, absolute value:
+
+(+), (-), (*)   :: (Num a) => a -> a -> a
+abs             :: (Num a) => a -> a
+
+5 + 6
+0.5 + 4
+
+-- Num does not provide a division operator
+-- 2 different kinds of division operators are provided in two non-overlapping subclasses of Num
+
+-- Integral provides the whole-number division and remainder operations 
+-- Instances of Integral are Integer (unbounded or mathematical integers) and 
+-- Int (bounded, machine integers, with a range equivalent to at least 29-bit signed binary) - Int32 or Int64
+
+
+quot 20 4
+4 'quot' 6
+
+div 20 4
+5 'div' 4
+
+mod 20 5
+4 'mod' 6
+
+rem 4 6
+20 'rem' 5
+
+-- operations satisfy
+(x ‘quot‘ y)⋆y + (x ‘rem‘ y) == x  
+(show ( (x ‘div‘  y)⋆y + (x ‘mod‘ y) == x  
+
+
+-- All other numeric types belong to the class Fractional, which provides the ordinary division operator (/):
+
+PutStrLn (show (20 / 4))
+PutStrLn (show (2 / 10))
+
+-- The (subclass) Floating contains trigonometric, logarithmic, exponential functions:
+
+sin 0
+
+-- Ratio
+-- quite often denominators increase quickly 
+-- for bounded Int-like integral types that quickly leads to useless results
+-- then ratio might be used!
+
+putStrLn (show (1%2 + 1%3))
+putStrLn (show (6%2))
+
+-- Rational is actually Ratio Integer
+type Rational = Ratio Integer
+
+putStrLn (show (toRational 1.5))
+
+-- changes between floating and rational numbers are not perfect:
+putStrLn (show (toRational (fromRational (15%10))))
+
+-- Complex
+data Complex a
+    = !a :+ !a 
+-- constructs a complex number from its real and imaginary parts
+
+let z = 0:+1
+putStrLn (show (realPart z))
+putStrLn (show (imagPart z))
+putStrLn (show (abs z))
+
+

@@ -1,69 +1,35 @@
-vals = (3, 7)
+next x = x + 1
 
-f x = (x, x + 1)
-
-g :: (Num a) => a -> (a, a)
-g x = (x+1, x)
-
--- to show that type signatures are optional
-greetings :: String -> String
-greetings name = "hello" ++ " " ++ name
+hypotenuse x y = sqrt (x^2 + y^2)
 
 greet name = "hello" ++ " " ++ name
 
--- pattern matching
+greet2 :: String -> String
+greet2 name = "hello" ++ " " ++ name
+
+greetNext x = (next x, greet (show (next x)))
+
 hello :: String -> String
-hello "Olafur"     = "hello, Olafur!"
+hello "Olafur" = "hello, Olafur!"
 hello "Rocamadour" = "hey!"
-hello _            = "Nice to meet you!"
-
-
-myDouble  x = (if x > 145 then x else x*2) + 1
-myDouble' x = if x > 145
-                        then x
-                        else x*2
-
--- show how to define functions using lambdas
-notLambda = \x y -> x + y
-
--- recursion
-factorial :: (Intergal a) => a -> a
-factorial 0 = 1
-factorial n = n * factorial (n-1)
-
+hello x = greet x
 
 main =
   do
-    let (a, b) = vals
-    putStrLn (show a)
-    putStrLn (show b)
+    putStrLn (show (next 4))
+    putStrLn (show (next (next 4)))
 
-    let (_, c) = f 4
-    putStrLn (show c)
-
-    let (d, _) = g 4
-    putStrLn (show d)
-
-    let y = myDouble 1
-    putStrLn (show y)
-    let y' = myDouble 146
-    putStrLn (show y')
-    let z = myDouble' 1
-    putStrLn (show z)
-    let z = myDouble' 146
-    putStrLn (show z')
+    putStrLn (show (hypotenuse 3 4))
 
     putStrLn (greet "world")
-    putStrLn (greetings "world")
+    putStrLn (greet2 "world")
+
+    putStrLn (show (greetNext 7))
+
+    let (x, y) = greetNext 7
+    putStrLn (show x)
+    putStrLn y
+
     putStrLn (hello "Olafur")
     putStrLn (hello "Rocamadour")
     putStrLn (hello "Jane")
-
-    let t = notLambda 1 2
-    putStrLn (show t)
-
-    let k = factorial 5
-    putStrLn (show k)
-
-    -- when lambdas are convenient
-    map (\x -> x*x - 1) [1..5]

@@ -1,3 +1,6 @@
+    map next [1..5]
+    map (\x -> x + 1) [1..5]
+
 -- CURRYING:
 -- f :: X ->  Y ->  Z -> A
 -- is the same as

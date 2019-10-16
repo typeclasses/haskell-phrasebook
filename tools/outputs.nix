@@ -23,6 +23,7 @@ in
         (run "common-types.txt" ../common-types.hs {})
         (run "crypto-hashing.txt" ../crypto-hashing.hs {})
         (run "dynamic.txt" ../dynamic.hs {})
+        (run "enum-ranges.txt" ../enum-ranges.hs {})
         (run "for-loops.txt" ../for-loops.hs {})
         (run "functions.txt" ../functions.hs {})
         (run "hashing.txt" ../hashing.hs {})

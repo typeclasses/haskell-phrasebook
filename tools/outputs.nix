@@ -34,6 +34,7 @@ in
         (run "mutable-references.txt" ../mutable-references.hs {})
         (run "invert.txt" ../invert.hs {})
         (run "threads.txt" ../threads.hs { pipes = [(sed "s!^fork.*$!...!")]; })
+        (run "time.txt" ../time.hs { pipes = [(sed "s!(Now .*: ).*$!\\1...!")]; })
         (run "timeouts.txt" ../timeouts.hs {})
         (run "transactions.txt" ../transactions.hs { pipes = [(sed "s!\\[.*\\]!...!")]; })
         (run "variables.txt" ../variables.hs {})

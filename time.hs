@@ -20,8 +20,8 @@ main =
     now_posix :: POSIXTime <- getPOSIXTime
     putStrLn ("Now (POSIX): " ++ show now_posix)
 
-    t1_utc :: UTCTime <- parse "%Y-%m-%d %H:%M:%S"
-                               "2038-01-19 03:14:07"
+    let t1_string = "2038-01-19 03:14:07"
+    t1_utc :: UTCTime <- parse "%Y-%m-%d %H:%M:%S" t1_string
     putStrLn (show t1_utc)
 
     putStrLn (render "%Y-%m-%d" t1_utc)

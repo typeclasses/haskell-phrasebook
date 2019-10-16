@@ -50,7 +50,7 @@ For more on what we're about, please see our Type Classes statement of [values](
 
 ## License
 
-All of the code in this repository is offered under the Creative Commons [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license, which allows free non-commercial use with attribution. We will only accept contributions that are licensed under these same terms.
+All of the code in this repository is offered under the Creative Commons [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license, which allows free non-commercial use with attribution. We will only accept contributions that are licensed under these same terms. Please let us know what name and URL you'd like to have listed on the [contributors](https://typeclasses.github.io/haskell-phrasebook/thanks) page.
 
 ## Style guide
 

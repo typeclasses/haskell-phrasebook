@@ -1,7 +1,5 @@
 {-# LANGUAGE NumericUnderscores #-}
 
-module Main where
-
 import Control.Concurrent
 import Control.Concurrent.Async
 import Control.Concurrent.STM

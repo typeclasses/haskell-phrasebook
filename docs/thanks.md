@@ -10,3 +10,4 @@ Thanks to the following people who have [contributed](https://typeclasses.github
 - [Dima Kurilo](https://twitter.com/DimaKurilo) -- [Bounded queues](https://github.com/typeclasses/haskell-phrasebook/pull/18)
 - [Taylor Fausak](https://taylor.fausak.me) -- [Time](https://github.com/typeclasses/haskell-phrasebook/pull/19)
 - [Julian Birch](https://colourcoding.net/) -- [Maybe](https://github.com/typeclasses/haskell-phrasebook/commit/518a0cb1cfd8ab7b583cfb699749259c018b47a9)
+- [Florian Beeres](https://fbrs.io/) -- [Records with optics](https://github.com/typeclasses/haskell-phrasebook/pull/34)

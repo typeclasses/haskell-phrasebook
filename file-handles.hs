@@ -24,4 +24,6 @@ main =
     atEnd <- hIsEOF h
     putStrLn (show atEnd)
 
+    hClose h
+
     removeFile "hello.txt"

@@ -8,6 +8,7 @@ haskellPackages.ghcWithPackages (p: [
   p.hashable
   p.memory
   p.mwc-random
+  p.network
   p.optics
   p.safe-exceptions
   p.stm

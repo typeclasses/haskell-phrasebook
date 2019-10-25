@@ -1,0 +1,3 @@
+System status is normal.
+Alarm! System is in a degraded state.
+System status is normal.

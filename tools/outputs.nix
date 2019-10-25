@@ -4,7 +4,7 @@ let
     run = name: hsFile: { pipes ? [] }: {
         inherit name;
         path = runCommand "phrasebook-output-${name}.txt" { buildInputs = [ haskell ]; } ''
-            runhaskell ${lib.escapeShellArgs (ghcOptions ++ ["${hsFile}"])} ${lib.concatMapStringsSep " " (x: "| ${x}") pipes} > $out
+            ${runhaskell "${hsFile}"} ${lib.concatMapStringsSep " " (x: "| ${x}") pipes} > $out
         '';
     };
 
@@ -18,6 +18,10 @@ let
     ];
 
     sed = x: "sed -re ${lib.escapeShellArg x}";
+
+    outputName = x: "phrasebook-output-${x}.txt";
+
+    runhaskell = x: "runhaskell ${lib.escapeShellArgs (ghcOptions ++ [x])}";
 
 in
     linkFarm "haskell-phrasebook-outputs" [
@@ -40,4 +44,22 @@ in
         (run "timeouts.txt" ../timeouts.hs {})
         (run "transactions.txt" ../transactions.hs { pipes = [(sed "s!\\[.*\\]!...!")]; })
         (run "variables.txt" ../variables.hs {})
+
+        rec {
+            name = "monitoring.txt";
+            path = runCommand (outputName name) { buildInputs = [ haskell ]; }
+              ''
+                # Start the report aggregator in the background
+                ${runhaskell "${../monitoring.hs}"} aggregate-reports > $out &
+
+                # Brief delay to make sure the aggregator is started
+                sleep 1
+
+                # Send reports to the aggregator
+                ${runhaskell "${../monitoring.hs}"} send-demo-reports
+
+                # Stop the aggregator
+                kill $!
+              '';
+        }
     ]

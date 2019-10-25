@@ -61,7 +61,7 @@ decodeReport c = find (\r -> encodeReport r == c) [Failure, Success]
 
 ---  Receiving event reports  ---
 
-serverAddress = S.SockAddrUnix "monitoring-socket"
+serverAddress = S.SockAddrUnix "\0haskell-phrasebook/monitoring"
 
 openServerSocket =
   do

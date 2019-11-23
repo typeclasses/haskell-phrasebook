@@ -40,7 +40,7 @@ in
         (run "mutable-references.txt" ../mutable-references.hs {})
         (run "records-with-optics.txt" ../records-with-optics.hs {})
         (run "threads.txt" ../threads.hs { pipes = [(sed "s!^fork.*$!...!")]; })
-        (run "time.txt" ../time.hs { pipes = [(sed "s!(Now .*: ).*$!\\1...!")]; })
+        (run "moments-in-time.txt" ../moments-in-time.hs { pipes = [(sed "s!(Now .*: ).*$!\\1...!")]; })
         (run "timeouts.txt" ../timeouts.hs {})
         (run "transactions.txt" ../transactions.hs { pipes = [(sed "s!\\[.*\\]!...!")]; })
         (run "variables.txt" ../variables.hs {})

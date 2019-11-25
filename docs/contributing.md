@@ -16,12 +16,13 @@ If you've been frustrated with Haskell but are willing to show up with a constru
 
 If you'd like to contribute and need inspiration, try these sources for topic ideas:
 
-  * Our GitHub issues with the [Hacktoberfest label](https://github.com/typeclasses/haskell-phrasebook/issues?q=is%3Aissue+is%3Aopen+label%3Ahacktoberfest).
-  * [Go by Example](https://gobyexample.com/) and [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html).
+  * Our [GitHub issue list](https://github.com/typeclasses/haskell-phrasebook/issues)
+  * [Go by Example](https://gobyexample.com/)
+  * [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)
 
 ## How to contribute code with GitHub
 
-If you are a seasoned GitHub user, you may not need to read this section. If you are unfamiliar with pull requests but want that sweet [Hacktoberfest](https://hacktoberfest.digitalocean.com/) t-shirt, read on:
+If you are a seasoned GitHub user, you may not need to read this section. If you are unfamiliar with pull requests, read on:
 
 On [the project's main page](https://github.com/typeclasses/haskell-phrasebook), click the "Create new file" button. If you don't have any code, just enter a file name for the example you'd like to see (then once the pull request is open, we can talk about what should go there). Click the "Propose new file" button, then on the next screen the "Create pull request" button.
 

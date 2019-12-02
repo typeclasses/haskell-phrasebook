@@ -11,6 +11,7 @@ haskellPackages.ghcWithPackages (p: [
   p.network
   p.optics
   p.safe-exceptions
+  p.signal
   p.stm
   p.time
   p.utf8-string

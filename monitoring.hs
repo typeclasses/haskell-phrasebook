@@ -9,6 +9,9 @@ import Data.Foldable (for_, find)
 import Data.Maybe (mapMaybe)
 
 import System.Environment
+import System.Exit
+import System.Signal
+import System.Process
 
 import Control.Exception.Safe
 
@@ -36,11 +39,12 @@ main =
     args <- getArgs
 
     case args of
-        ["aggregate-reports"] -> runAggregationService
-        ["send-demo-reports"] -> runReportingDemo
-        _                     -> putStrLn "Invalid args"
+        ["aggregate-reports"]  -> aggregateReportsMain
+        ["send-demo-reports"]  -> sendDemoReportsMain
+        ["full-demonstration"] -> fullDemonstrationMain
+        _                      -> die "Invalid args"
 
-runAggregationService =
+aggregateReportsMain =
   do
     reportQueue <- atomically newTQueue
     alarmQueue <- atomically newTQueue
@@ -49,7 +53,17 @@ runAggregationService =
       [ receiveReports reportQueue
       , analyzeReports reportQueue alarmQueue
       , sendAlarms alarmQueue
+      , waitForTerminationSignal
       ]
+
+    putStrLn "Aggregator is stopping."
+
+waitForTerminationSignal =
+  do
+    terminate <- atomically (newTVar False)
+    installHandler sigTERM $ \_signal ->
+        atomically (writeTVar terminate True)
+    atomically (readTVar terminate >>= check)
 
 
 ---  Message format  ---
@@ -145,7 +159,7 @@ sendAlarms alarmQueue =
 
 ---  Client that sends event reports to an aggregation service  ---
 
-runReportingDemo =
+sendDemoReportsMain =
   do
     reportQueue <- atomically newTQueue
 
@@ -153,6 +167,8 @@ runReportingDemo =
       [ generateReports reportQueue
       , sendReports reportQueue
       ]
+
+    putStrLn "Done sending demo reports."
 
 
 ---  A fixed schedule of event reports for demonstration purposes  ---
@@ -183,5 +199,17 @@ sendReports reportQueue =
     forever $
       do
         r <- atomically (readTQueue reportQueue)
-        putStr [encodeReport r]
+        putStrLn (case r of Success -> "1 (success)"; Failure -> "0 (failure)")
         sendAll clientSocket (Data.ByteString.Char8.pack [encodeReport r])
+
+
+---  Full demonstration  ---
+
+fullDemonstrationMain =
+  do
+    server <- spawnCommand "runhaskell monitoring.hs aggregate-reports"
+    threadDelay 1_000_000
+    callCommand "runhaskell monitoring.hs send-demo-reports"
+    terminateProcess server
+    waitForProcess server
+    putStrLn "The full demonstration is complete."

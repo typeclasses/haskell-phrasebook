@@ -54,5 +54,5 @@ System status is normal.
 1 (success)
 1 (success)
 Done sending demo reports.
-Aggregator is stopping.
+The monitoring server is stopping.
 The full demonstration is complete.

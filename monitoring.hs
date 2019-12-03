@@ -3,36 +3,34 @@
 import qualified Network.Socket as S
 import Network.Socket.ByteString (recv, sendAll)
 
-import Control.Applicative ((<|>))
-import Control.Monad (forever, when)
-import Data.Foldable (for_, find)
-import Data.Maybe (mapMaybe)
+import Control.Exception.Safe
+
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Char8
 
 import System.Environment
 import System.Exit
 import System.Signal
 import System.Process
 
-import Control.Exception.Safe
-
 import Control.Concurrent
 import Control.Concurrent.Async
 import Control.Concurrent.STM
 
-import qualified Data.ByteString as BS
-import qualified Data.ByteString.Char8
-
 import qualified Data.Sequence as Seq
+import Data.Ratio ((%))
 
-import Data.Ratio
+import Control.Monad (forever, when)
+import Data.Foldable (asum, for_, find)
+import Data.Maybe (mapMaybe)
 
 -- An event report represents the result of a single action.
 data EventReport = Success | Failure
-  deriving Eq
+    deriving Eq
 
 -- The system status is an overview of whether, in general, actions tend to be succeeding or failing.
 data SystemStatus = Okay | Alarm
-  deriving Eq
+    deriving Eq
 
 main =
   do
@@ -56,7 +54,7 @@ aggregateReportsMain =
       , waitForTerminationSignal
       ]
 
-    putStrLn "Aggregator is stopping."
+    putStrLn "The monitoring server is stopping."
 
 waitForTerminationSignal =
   do
@@ -127,8 +125,9 @@ analyzeReports reportQueue alarmQueue = continue Nothing Seq.empty
       do
         newReport <- atomically (readTQueue reportQueue)
 
-        let reports' = Seq.take reportsNeeded (newReport Seq.<| reports)
-            status' = analysis reports' <|> status
+        let reports' = Seq.take reportsNeeded
+                        (newReport Seq.<| reports)
+            status' = asum [analysis reports', status]
 
         for_ @Maybe status' $ \s ->
             when (status /= status') $
@@ -199,15 +198,18 @@ sendReports reportQueue =
     forever $
       do
         r <- atomically (readTQueue reportQueue)
-        putStrLn (case r of Success -> "1 (success)"; Failure -> "0 (failure)")
-        sendAll clientSocket (Data.ByteString.Char8.pack [encodeReport r])
+        putStrLn (case r of Success -> "1 (success)"
+                            Failure -> "0 (failure)")
+        sendAll clientSocket
+            (Data.ByteString.Char8.pack [encodeReport r])
 
 
 ---  Full demonstration  ---
 
 fullDemonstrationMain =
   do
-    server <- spawnCommand "runhaskell monitoring.hs aggregate-reports"
+    server <- spawnCommand
+        "runhaskell monitoring.hs aggregate-reports"
     threadDelay 1_000_000
     callCommand "runhaskell monitoring.hs send-demo-reports"
     terminateProcess server

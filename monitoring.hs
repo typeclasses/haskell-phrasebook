@@ -117,7 +117,7 @@ receiveReports'' receivedBytes reportQueue =
 
 ---  Analysis of system status changes using event reports  ---
 
-reportsNeeded = 10
+reportWindowSize = 10
 okayThreshold = 80 % 100
 alarmThreshold = 50 % 100
 
@@ -127,7 +127,7 @@ analyzeReports reportQueue alarmQueue = continue Nothing Seq.empty
       do
         newReport <- atomically (readTQueue reportQueue)
 
-        let reports' = Seq.take reportsNeeded
+        let reports' = Seq.take reportWindowSize
                         (newReport Seq.<| reports)
             status' = asum [analysis reports', status]
 
@@ -138,10 +138,10 @@ analyzeReports reportQueue alarmQueue = continue Nothing Seq.empty
         continue status' reports'
 
 analysis reports
-    | Seq.length reports < reportsNeeded  = Nothing
-    | successRate <= alarmThreshold       = Just Alarm
-    | successRate >= okayThreshold        = Just Okay
-    | otherwise                           = Nothing
+    | Seq.length reports < reportWindowSize = Nothing
+    | successRate <= alarmThreshold         = Just Alarm
+    | successRate >= okayThreshold          = Just Okay
+    | otherwise                             = Nothing
   where
     successes = Seq.filter (== Success) reports
     successRate = Seq.length successes % Seq.length reports

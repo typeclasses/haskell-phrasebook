@@ -81,7 +81,8 @@ serverAddress = S.SockAddrUnix "\0haskell-phrasebook/monitoring"
 
 openServerSocket =
   do
-    serverSocket <- S.socket S.AF_UNIX S.Stream S.defaultProtocol
+    serverSocket <-
+        S.socket S.AF_UNIX S.Stream S.defaultProtocol
     S.bind serverSocket serverAddress
     S.listen serverSocket S.maxListenQueue
     return serverSocket

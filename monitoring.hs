@@ -138,7 +138,8 @@ analyzeReports reportQueue alarmQueue = continue Nothing Seq.empty
 
         let reports' = Seq.take reportWindowSize
                         (newReport Seq.<| reports)
-            status' = asum [analysis reports', status]
+
+        let status' = asum [analysis reports', status]
 
         for_ @Maybe status' $ \s ->
             when (status /= status') $

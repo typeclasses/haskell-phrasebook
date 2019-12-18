@@ -66,9 +66,13 @@ waitForTerminationSignal =
 
 ---  Message format  ---
 
-encodeReport r = case r of Failure -> '0'; Success -> '1'
+encodeReport r =
+    case r of
+        Failure -> '0'
+        Success -> '1'
 
-decodeReport c = find (\r -> encodeReport r == c) [Failure, Success]
+decodeReport c =
+    find (\r -> encodeReport r == c) [Failure, Success]
 
 
 ---  Receiving event reports  ---

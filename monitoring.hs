@@ -121,6 +121,15 @@ reportWindowSize = 10
 okayThreshold = 80 % 100
 alarmThreshold = 50 % 100
 
+analysis reports
+    | Seq.length reports < reportWindowSize = Nothing
+    | successRate <= alarmThreshold         = Just Alarm
+    | successRate >= okayThreshold          = Just Okay
+    | otherwise                             = Nothing
+  where
+    successes = Seq.filter (== Success) reports
+    successRate = Seq.length successes % Seq.length reports
+
 analyzeReports reportQueue alarmQueue = continue Nothing Seq.empty
   where
     continue status reports =
@@ -136,15 +145,6 @@ analyzeReports reportQueue alarmQueue = continue Nothing Seq.empty
                 atomically (writeTQueue alarmQueue s)
 
         continue status' reports'
-
-analysis reports
-    | Seq.length reports < reportWindowSize = Nothing
-    | successRate <= alarmThreshold         = Just Alarm
-    | successRate >= okayThreshold          = Just Okay
-    | otherwise                             = Nothing
-  where
-    successes = Seq.filter (== Success) reports
-    successRate = Seq.length successes % Seq.length reports
 
 
 ---  Sending alerts about system status changes  ---

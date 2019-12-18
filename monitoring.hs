@@ -195,16 +195,14 @@ openClientSocket =
     return clientSocket
 
 sendReports reportQueue =
-  do
-    clientSocket <- openClientSocket
-
-    forever $
-      do
-        r <- atomically (readTQueue reportQueue)
-        putStrLn (case r of Success -> "1 (success)"
-                            Failure -> "0 (failure)")
-        sendAll clientSocket
-            (Data.ByteString.Char8.pack [encodeReport r])
+    bracket openClientSocket S.close $ \clientSocket ->
+        forever $
+          do
+            r <- atomically (readTQueue reportQueue)
+            putStrLn (case r of Success -> "1 (success)"
+                                Failure -> "0 (failure)")
+            sendAll clientSocket
+                (Data.ByteString.Char8.pack [encodeReport r])
 
 
 ---  Full demonstration  ---

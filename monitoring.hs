@@ -87,13 +87,14 @@ openServerSocket =
     return serverSocket
 
 receiveReports reportQueue =
-    bracket openServerSocket S.close $ \serverSocket -> forever $ mask $ \unmask ->
-      do
-        (clientSocket, _clientAddr) <- S.accept serverSocket
+    bracket openServerSocket S.close $ \serverSocket ->
+        forever $ mask $ \unmask ->
+          do
+            (clientSocket, _clientAddr) <- S.accept serverSocket
 
-        forkFinally
-            (unmask (receiveReports' clientSocket reportQueue))
-            (\_ -> S.close clientSocket)
+            forkFinally
+                (unmask (receiveReports' clientSocket reportQueue))
+                (\_ -> S.close clientSocket)
 
 receiveReports' clientSocket reportQueue = continue
   where

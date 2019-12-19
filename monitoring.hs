@@ -79,17 +79,19 @@ decodeReport c =
 
 serverAddress = S.SockAddrUnix "\0haskell-phrasebook/monitoring"
 
-openServerSocket =
-  do
-    serverSocket <-
-        S.socket S.AF_UNIX S.Stream S.defaultProtocol
-    S.bind serverSocket serverAddress
-    S.listen serverSocket S.maxListenQueue
-    return serverSocket
+openSocket = S.socket S.AF_UNIX S.Stream S.defaultProtocol
+
+withServerSocket action =
+    bracket openSocket S.close $ \serverSocket ->
+      do
+        S.bind serverSocket serverAddress
+        S.listen serverSocket S.maxListenQueue
+        action serverSocket
 
 receiveReports reportQueue =
-    bracket openServerSocket S.close $ \serverSocket ->
-        forever $ mask $ \unmask ->
+    withServerSocket $ \serverSocket ->
+      forever $
+        mask $ \unmask ->
           do
             (clientSocket, _clientAddr) <- S.accept serverSocket
 
@@ -189,14 +191,14 @@ generateReports reportQueue =
 
 ---  Sending reports to the server  ---
 
-openClientSocket =
-  do
-    clientSocket <- S.socket S.AF_UNIX S.Stream S.defaultProtocol
-    S.connect clientSocket serverAddress
-    return clientSocket
+withClientSocket action =
+    bracket openSocket S.close $ \clientSocket ->
+      do
+        S.connect clientSocket serverAddress
+        action clientSocket
 
 sendReports reportQueue =
-    bracket openClientSocket S.close $ \clientSocket ->
+    withClientSocket $ \clientSocket ->
         forever $
           do
             r <- atomically (readTQueue reportQueue)

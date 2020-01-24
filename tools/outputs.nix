@@ -29,6 +29,7 @@ in
         (run "dynamic" ../dynamic.hs {})
         (run "enum-ranges" ../enum-ranges.hs {})
         (run "file-handles" ../file-handles.hs {})
+        (run "folding-lists" ../folding-lists.hs {})
         (run "for-loops" ../for-loops.hs {})
         (run "functions" ../functions.hs {})
         (run "hashing" ../hashing.hs {})

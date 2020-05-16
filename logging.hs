@@ -5,7 +5,7 @@ import Control.Exception.Safe (catchAny, displayException)
 import Control.Monad (guard)
 import Data.Foldable (fold)
 import System.Directory (doesFileExist)
-import System.IO (hPutStr, stderr)
+import System.IO (hPutStrLn, stderr)
 
 
 data Log =
@@ -18,16 +18,16 @@ data Log =
 -- A log that writes to the console.
 consoleLog =
   Log {
-    logInfo = putStr,
-    logError = hPutStr stderr
+    logInfo = putStrLn,
+    logError = hPutStrLn stderr
   }
 
 
 -- A log that writes to the specified files.
 fileLog infoPath errPath =
   Log {
-    logInfo = appendFile infoPath,
-    logError = appendFile errPath
+    logInfo = appendFile infoPath . (<> "\n"),
+    logError = appendFile errPath . (<> "\n")
   }
 
 
@@ -37,7 +37,7 @@ formattedLog topic log' =
     Log {logInfo = logInfo', logError = logError'} = log'
 
     formatLogMessage lvl msg =
-      fold ["[", lvl, " (", topic, ")]: ", msg, "\n"]
+      fold ["[", lvl, " (", topic, ")]: ", msg]
   in
     Log {
       logInfo = logInfo' . formatLogMessage "INFO",

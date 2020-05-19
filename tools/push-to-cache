@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# We use this script to upload the Nix shell environment to Cachix.
+
+set -eufo pipefail
+
+function push {
+    nix build --no-link -f tools "$1" | cachix push typeclasses
+}
+
+push haskell
+push ghcid
+push ghcide

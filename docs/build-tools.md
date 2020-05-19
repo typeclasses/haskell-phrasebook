@@ -10,13 +10,20 @@ You do not *have to* use Nix to run these Haskell programs, but you may find it 
 
 1. [Install Nix](https://nixos.org/nix/manual/#chap-installation)
 
-2. Enter a Nix shell:
+2. Install [Cachix](https://cachix.org/), and add the `typeclasses` cache. This step is optional, but will greatly reduce build time.
+
+    ```
+    $ nix-env -iA cachix -f https://cachix.org/api/v1/install
+    $ cachix use typeclasses
+    ```
+
+3. Enter a Nix shell:
 
     ```
     $ nix-shell tools/shell.nix
     ```
 
-3. Within the Nix shell, you have all of the dependencies required by the examples in the Phrasebook. For example, you can run commands like `runhaskell` and `ghcid`:
+4. Within the Nix shell, you have all of the dependencies required by the examples in the Phrasebook. For example, you can run commands like `runhaskell` and `ghcid`:
 
     ```
     $ runhaskell hello-world.hs

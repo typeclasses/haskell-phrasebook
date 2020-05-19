@@ -1,0 +1,5 @@
+(Boot info) Starting
+(App info) Application started
+
+--- info.txt ---
+Application started

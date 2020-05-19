@@ -1,102 +1,91 @@
-{-# LANGUAGE NamedFieldPuns #-}
-
-import Control.Applicative ((<|>))
-import Control.Exception.Safe (catchAny, displayException)
-import Control.Monad (guard)
+import Control.Exception.Safe (displayException, tryAny)
 import Data.Foldable (fold)
-import System.Directory (doesFileExist)
-import System.IO (hPutStrLn, stderr)
+import System.Directory (getPermissions, writable)
+import System.Environment (getEnv)
+import System.IO (hPutStr, stdout, stderr)
 
+data Level = Info | Error
 
-data Log =
-  Log {
-    logInfo :: String -> IO (),
-    logError :: String -> IO ()
-  }
+data Event = Event Level String
 
+data Log = Log { record :: Event -> IO () }
 
--- A log that writes to the console.
-consoleLog =
-  Log {
-    logInfo = putStrLn,
-    logError = hPutStrLn stderr
-  }
+consoleLog = Log $ \(Event level message) ->
+    hPutStr (standardStream level) (message <> "\n")
 
+standardStream Info = stdout
+standardStream Error = stderr
 
--- A log that writes to the specified files.
-fileLog infoPath errPath =
-  Log {
-    logInfo = appendFile infoPath . (<> "\n"),
-    logError = appendFile errPath . (<> "\n")
-  }
+fileLog path = Log $ \(Event level message) ->
+    appendFile (path level) (message <> "\n")
 
+formattedLog topic log = Log $ \event ->
+    record log (formatEvent topic event)
 
--- Add formatting to a log.
-formattedLog topic log' =
-  let
-    Log {logInfo = logInfo', logError = logError'} = log'
+formatEvent topic (Event level msg) = Event level msg'
+  where
+    msg' = paren (topic ! levelString level) ! msg
 
-    formatLogMessage lvl msg =
-      fold ["[", lvl, " (", topic, ")]: ", msg]
-  in
-    Log {
-      logInfo = logInfo' . formatLogMessage "INFO",
-      logError = logError' . formatLogMessage "ERROR"
-    }
+paren x = "(" <> x <> ")"
 
+x ! y = x <> " " <> y
 
--- Combine two logs.
-instance Semigroup Log where
-  log1 <> log2 = Log {
-    logInfo = \str -> do
-      logInfo log1 str
-      logInfo log2 str,
+levelString Info = "info"
+levelString Error = "error"
 
-    logError = \str -> do
-      logError log1 str
-      logError log2 str
-  }
+nullLog = Log (\_ -> return ())
 
+multiLog log1 log2 = Log $ \event ->
+  do
+    record log1 event
+    record log2 event
 
--- Adds logging to a function.
-logFunction tag Log {logInfo} func input = do
-  logInfo (tag <> ": input: " <> show input)
-  let output = func input
-  logInfo (tag <> ": output: " <> show output)
-  return output
+instance Semigroup Log where (<>) = multiLog
+instance Monoid Log where mempty = nullLog
 
+recoverFromException log action =
+  do
+    result <- tryAny action
 
--- Adds logging to an action.
-logAction tag Log {logInfo, logError} action = do
-  logInfo (tag <> ": starting")
+    case result of
+        Left e ->
+          do
+            record log (Event Error (displayException e))
+            return Nothing
+        Right x ->
+            return (Just x)
 
-  action `catchAny` \err -> do
-    logError (tag <> ": " <> displayException err)
+main =
+  do
+    let bootLog = formattedLog "Boot" consoleLog
+    record bootLog (Event Info "Starting")
+    fileLog <- recoverFromException bootLog initFileLog
 
-  logInfo (tag <> ": done")
+    let appLog = formattedLog "App" consoleLog <> fold fileLog
+    record appLog (Event Info "Application started")
 
+    -- ...
 
-main = do
-  let startupLog = formattedLog "Startup" consoleLog
+initFileLog =
+  do
+    infoPath <- envLogPath "INFO"
+    errorPath <- envLogPath "ERROR"
 
-  let infoLog = "./info.log"
-  let errLog = "./error.log"
+    let
+        path Info = infoPath
+        path Error = errorPath
 
-  logAction "check log files" startupLog $ do
-    infoExists <- doesFileExist infoLog
-    errorExists <- doesFileExist errLog
-    guard (not infoExists && not errorExists) <|> do
-      error $
-        "Log files already exist! " <>
-        "They maybe be modified if you continue!"
+    return (fileLog path)
 
-  putStrLn "Continue (press [ENTER])?"
-  _ <- getLine
+envLogPath varName =
+  do
+    path <- getEnv varName
+    assertWritable path
+    return path
 
-  let
-    appLog = formattedLog "App" $
-      consoleLog <> fileLog "./info.log" "./error.log"
-
-  n <- logFunction "plus 2" appLog (+ 2) (5 :: Int)
-
-  putStrLn ("The answer was " <> show n)
+assertWritable path =
+  do
+    permissions <- getPermissions path
+    case writable permissions of
+        True -> return ()
+        False -> fail ("Log path" ! path ! "is not writable")

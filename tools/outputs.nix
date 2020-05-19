@@ -17,6 +17,7 @@ examples = [
     { name = "hashing"; file = ../hashing.hs; }
     { name = "hello-world"; file = ../hello-world.hs; }
     { name = "invert"; file = ../invert.hs; }
+    { name = "logging"; file = ../logging.hs; env.INFO = "info.txt"; env.ERROR = "error.txt"; before = ["touch info.txt" "touch error.txt"]; after = ["echo '\n--- info.txt ---' >> $out" "cat info.txt >> $out"]; }
     { name = "mutable-references"; file = ../mutable-references.hs; }
     { name = "moments-in-time"; file = ../moments-in-time.hs; sed = "s!(Now .*: ).*$!\\1...!"; }
     { name = "monitoring"; file = ../monitoring.hs; args = ["full-demonstration"]; }
@@ -35,11 +36,14 @@ phrasebookOutput =
     , file # The Haskell source file to run to produce the output
     , args ? [] # List of arguments for the Haskell program
     , sed ? null # A sed script to run on the program output (we use this to filter non-deterministic output from programs that employ concurrency or randomness, so that the derivations contain only consistently reproducible results)
+    , env ? {} # Any additional environment variables
+    , before ? [] # Any additional shell commands to run after the program
+    , after ? [] # Any additional shell commands to run after the program
     }:
     {
         name = "${name}.txt";
         path = runghc {
-            inherit name;
+            inherit name env before after;
             hsFile = file;
             programArgs = args;
             pipes = if sed != null then ["${gnused}/bin/sed -re ${lib.escapeShellArg sed}"] else [];
@@ -62,14 +66,21 @@ runghc =
     , runghcArgs ? [] # List of arguments for runghc
     , ghcArgs ? [] # List of arguments for GHC
     , pipes ? [] # List of additional shell commands to pipe the output through
+    , env ? {} # Any additional environment variables
+    , before ? [] # Any additional shell commands to run after the program
+    , after ? [] # Any additional shell commands to run after the program
     }:
     derivation {
         name = "runghc-${name}";
+        inherit env;
         path = ["${haskell}/bin" "${coreutils}/bin"];
-        buildScript = writeShellScript "builder-for-runghc-${name}" ''
-            ${coreutils}/bin/ln -s ${hsFile} ${name}.hs
-            ${haskell}/bin/runghc ${lib.escapeShellArgs (runghcArgs ++ ["--"] ++ ghcArgs ++ ["--"] ++ ["${name}.hs"] ++ programArgs)} ${lib.concatMapStringsSep " " (x: "| ${x}") pipes} > $out
-        '';
+        buildScript =
+            let
+                commands = before ++ [ linkSource run ] ++ after;
+                linkSource = ''${coreutils}/bin/ln -s ${hsFile} ${name}.hs'';
+                run = ''${haskell}/bin/runghc ${lib.escapeShellArgs (runghcArgs ++ ["--"] ++ ghcArgs ++ ["--"] ++ ["${name}.hs"] ++ programArgs)} ${lib.concatMapStringsSep " " (x: "| ${x}") pipes} > $out'';
+            in
+                writeShellScript "builder-for-runghc-${name}" (lib.concatStringsSep "\n" commands);
     };
 
 # A small wrapper around the built-in `derivation` function
@@ -77,11 +88,12 @@ derivation =
     { name # A string that appears as part of the path under /nix/store to help identify what is being built
     , buildScript # The shell script used to build the derivation
     , path ? [] # A list of directories to include on the binary path for the build script
+    , env ? {} # Any additional environment variables
     }:
-    builtins.derivation {
+    builtins.derivation ({
         inherit name system;
         PATH = lib.concatStringsSep ":" path;
         builder = writeShellScript "builder-for-${name}" buildScript;
-    };
+    } // env);
 
 in outputs

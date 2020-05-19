@@ -5,7 +5,7 @@ let
         name = "${name}.txt";
         path = runCommand "phrasebook-output-${name}.txt" { buildInputs = [ haskell ]; } ''
             ln -s ${hsFile} ${name}.hs
-            runhaskell ${lib.escapeShellArgs (ghcOptions ++ ["${name}.hs"] ++ args)} ${lib.concatMapStringsSep " " (x: "| ${x}") pipes} > $out
+            runhaskell ${lib.escapeShellArgs (["--"] ++ ghcOptions ++ ["--"] ++ ["${name}.hs"] ++ args)} ${lib.concatMapStringsSep " " (x: "| ${x}") pipes} > $out
         '';
     };
 

@@ -10,6 +10,7 @@ import qualified Data.ByteString.Char8
 
 import System.Environment
 import System.Exit
+import System.IO
 import System.Signal
 import System.Process
 
@@ -34,6 +35,8 @@ data SystemStatus = Okay | Alarm
 
 main =
   do
+    hSetBuffering stdout LineBuffering
+
     args <- getArgs
 
     case args of

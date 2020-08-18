@@ -1,0 +1,37 @@
+λ> :main
+Do Re Mi
+Fa Sol
+La Ti Do
+Fa SolL
+Dao  TRie  DMoi
+
+Fa Sol
+La Ti Do
+Do Re Mi
+Do Re Mi
+Fa Sol
+FaD LoSa o RlTe
+i  MDio
+
+La Ti Do
+
+λ> import System.Environment (setEnv)
+
+λ> setEnv "MAX_QUEUE" "100"
+
+λ> :main
+Fa Sol
+La Ti Do
+Do Re Mi
+La Ti Do
+Fa Sol
+Do Re Mi
+Fa Sol
+Do Re Mi
+La Ti Do
+La Ti Do
+Do Re Mi
+Fa Sol
+Fa Sol
+Do Re Mi
+La Ti Do

@@ -1,14 +1,14 @@
 {
   "nixpkgs": {
     "owner": "NixOS",
-    "repo": "nixpkgs-channels",
-    "rev": "76adfc180c0e4bad011e33ee73fba2a56e1f212b",
-    "sha256": "1rzkmxrardj2319qwm7ivlkypdb50j9ijfvgf17bb02rajdcxdx3"
+    "repo": "nixpkgs",
+    "rev": "13d0c311e3ae923a00f734b43fd1d35b47d8943a",
+    "sha256": "0izp5y55whbdaf26w3zy2xvkjvlll39lib1ifvb61ps9gmvlqn39"
   },
   "ghcide": {
     "owner": "cachix",
     "repo": "ghcide-nix",
-    "rev": "27d15fc49c1f4510adb82540439da362328cdef8",
-    "sha256": "1ic4mrryhgh9k041xv81vw0pky1b02k077rqy1jnz3jb47chwxf4"
+    "rev": "8cbf4092acc9faee31a68c4081b081ffebea1f40",
+    "sha256": "06i0b3l50xg7mdv5zm1jp2rgsdjr39vrb7jvlrzy1qxs3qp3qbar"
   }
 }

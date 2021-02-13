@@ -1,12 +1,17 @@
-#!/usr/bin/env bash
+#! /usr/bin/env nix-shell
+#! nix-shell --pure
+#! nix-shell --keep NIX_PATH
+#! nix-shell -i runhaskell
+#! nix-shell -p ghc nix cachix cacert
 
-# We use this script to upload the Nix shell environment to Cachix.
+-- We use this script to upload the Nix shell environment to Cachix.
 
-set -eufo pipefail
+import Control.Monad
+import Data.Foldable
+import System.Process
 
-function push {
-    nix-build tools --attr "$1" --no-out-link | cachix push typeclasses
-}
+main = traverse_ (build >=> push) ["haskell", "ghcid"]
 
-push haskell
-push ghcid
+build attr = fmap (head . lines) $ readProcess "nix-build" ["tools", "--attr", attr, "--no-out-link"] ""
+
+push path = callProcess "cachix" ["push", "typeclasses", path]

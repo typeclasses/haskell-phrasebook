@@ -1,8 +1,8 @@
 let
-  inherit (import ./default.nix) pkgs haskell ghcid ghcide;
+  inherit (import ./default.nix) pkgs haskell ghcid;
 in
   pkgs.mkShell {
-    buildInputs = [ haskell ghcid ghcide ];
+    buildInputs = [ haskell ghcid ];
     shellHook = ''
       export NIX_GHC="${haskell}/bin/ghc"
       export NIX_GHCPKG="${haskell}/bin/ghc-pkg"

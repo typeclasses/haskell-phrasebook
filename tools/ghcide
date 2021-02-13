@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -eufo pipefail
-
-nix-shell tools/shell.nix --pure --run "ghcide $@"

@@ -4,11 +4,5 @@
     "repo": "nixpkgs",
     "rev": "13d0c311e3ae923a00f734b43fd1d35b47d8943a",
     "sha256": "0izp5y55whbdaf26w3zy2xvkjvlll39lib1ifvb61ps9gmvlqn39"
-  },
-  "ghcide": {
-    "owner": "cachix",
-    "repo": "ghcide-nix",
-    "rev": "8cbf4092acc9faee31a68c4081b081ffebea1f40",
-    "sha256": "06i0b3l50xg7mdv5zm1jp2rgsdjr39vrb7jvlrzy1qxs3qp3qbar"
   }
 }

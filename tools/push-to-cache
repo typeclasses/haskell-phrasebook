@@ -10,4 +10,3 @@ function push {
 
 push haskell
 push ghcid
-push ghcide

@@ -25,4 +25,3 @@ function update {
 }
 
 update tools/versions.json nixpkgs nixos-20.09
-update tools/versions.json ghcide master

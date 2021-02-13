@@ -1,6 +1,6 @@
 { haskell }:
 
-haskell.packages.ghc865.ghcWithPackages (p: [
+haskell.packages.ghc8103.ghcWithPackages (p: [
   p.async
   p.containers
   p.cryptonite

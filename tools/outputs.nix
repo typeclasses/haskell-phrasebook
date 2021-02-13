@@ -54,6 +54,8 @@ phrasebookOutput =
                 "-fno-warn-name-shadowing"
                 "-fno-warn-type-defaults"
                 "-fno-warn-unused-do-bind"
+                "-fno-warn-unused-imports"
+                "-fno-warn-unused-top-binds"
             ];
         };
     };

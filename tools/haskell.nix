@@ -2,8 +2,11 @@
 
 haskell.packages.ghc8103.ghcWithPackages (p: [
   p.async
+  p.bytestring
   p.containers
   p.cryptonite
+  p.directory
+  p.filepath
   p.generic-deriving
   p.hashable
   p.memory

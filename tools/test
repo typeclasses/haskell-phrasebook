@@ -1,0 +1,41 @@
+#! /usr/bin/env nix-shell
+#! nix-shell --pure
+#! nix-shell --keep NIX_PATH
+#! nix-shell -i runhaskell
+#! nix-shell -p ghc nix rsync cacert
+
+{-# language ScopedTypeVariables #-}
+
+-- This is the test script run by the CI server.
+
+import Control.Monad
+import System.Directory
+import System.Process
+import System.Exit
+import System.FilePath ((</>))
+import qualified Data.ByteString as ByteString
+
+main = (build >>= copy) *> (findProblems >>= conclude)
+
+-- Builds all of the example outputs in the Nix store and returns the path.
+build :: IO FilePath =
+    fmap (head . lines) $ readProcess "nix-build" ["--attr", "outputs", "--no-out-link", "tools/default.nix"] ""
+
+-- Copies the example outputs from the Nix store into the "outputs-test" directory.
+copy (src :: FilePath) =
+    callProcess "rsync" ["--copy-links", "--recursive", "--chmod=ugo=rwX", src <> "/", "outputs-test"]
+
+-- The "outputs" and "outputs-test" directories should be identical. This action returns a list of the filenames that differ.
+findProblems :: IO [FilePath] =
+    listDirectory "outputs" >>= filterM isProblem
+
+-- Given an output file name, determines whether the file in "outputs" differs from the corresponding file in "outputs-test".
+isProblem (filename :: FilePath) =
+    pure (/=)
+      <*> ByteString.readFile ("outputs" </> filename)
+      <*> ByteString.readFile ("outputs-test" </> filename)
+
+-- If the problem list is non-empty, prints the list of problems and exits with a nonzero status code to indicate failure.
+conclude (problems :: [FilePath]) =
+    if null problems then putStrLn "Okay!"
+    else die ("Problems: " <> show problems)

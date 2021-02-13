@@ -5,7 +5,7 @@
 set -eufo pipefail
 
 function push {
-    nix build --no-link -f tools "$1" | cachix push typeclasses
+    nix-build tools --attr "$1" --no-out-link | cachix push typeclasses
 }
 
 push haskell

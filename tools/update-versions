@@ -1,6 +1,8 @@
 #! /usr/bin/env nix-shell
+#! nix-shell --pure
+#! nix-shell --keep NIX_PATH
 #! nix-shell -i bash
-#! nix-shell -p curl jq nix
+#! nix-shell -p curl jq nix cacert
 
 set -eufo pipefail
 

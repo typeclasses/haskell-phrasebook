@@ -205,10 +205,10 @@ sendReports reportQueue =
         forever $
           do
             r <- atomically (readTQueue reportQueue)
-            sendAll clientSocket
-                (Data.ByteString.Char8.pack [encodeReport r])
             putStrLn (case r of Success -> "1 (success)"
                                 Failure -> "0 (failure)")
+            sendAll clientSocket
+                (Data.ByteString.Char8.pack [encodeReport r])
 
 
 ---  Full demonstration  ---

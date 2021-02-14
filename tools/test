@@ -3,16 +3,20 @@
 #! nix-shell --keep NIX_PATH
 #! nix-shell -i runhaskell
 
-{-# language ScopedTypeVariables #-}
+{-# language OverloadedStrings, ScopedTypeVariables #-}
 
 -- This is the test script run by the CI server.
 
-import Control.Monad
+import Data.Foldable
 import System.Directory
 import System.Process
 import System.Exit
 import System.FilePath ((</>))
-import qualified Data.ByteString as ByteString
+import Data.ByteString.Lazy (ByteString)
+import qualified Data.ByteString.Lazy as ByteString
+import qualified Data.Text.Lazy as Text
+import qualified Data.Text.Lazy.Encoding as Text
+import qualified Data.Text.Lazy.IO as Text
 
 main = (build >>= copy) *> (findProblems >>= conclude)
 
@@ -24,17 +28,28 @@ build :: IO FilePath =
 copy (src :: FilePath) =
     callProcess "rsync" ["--copy-links", "--recursive", "--chmod=ugo=rwX", src <> "/", "outputs-test"]
 
--- The "outputs" and "outputs-test" directories should be identical. This action returns a list of the filenames that differ.
-findProblems :: IO [FilePath] =
-    listDirectory "outputs" >>= filterM isProblem
+data Problem = Problem FilePath ByteString
 
--- Given an output file name, determines whether the file in "outputs" differs from the corresponding file in "outputs-test".
-isProblem (filename :: FilePath) =
-    pure (/=)
-      <*> ByteString.readFile ("outputs" </> filename)
-      <*> ByteString.readFile ("outputs-test" </> filename)
+-- The "outputs" and "outputs-test" directories should be identical. This action returns a list of the filenames that differ.
+findProblems :: IO [Problem] =
+    listDirectory "outputs" >>= mapM problemsForFile >>= (return . fold)
+
+-- Given an output file name, returns a list of problems. If the file in "outputs" differs from the corresponding file in "outputs-test", that's a problem.
+problemsForFile (filename :: FilePath) =
+  do
+    expected <- ByteString.readFile ("outputs" </> filename)
+    actual <- ByteString.readFile ("outputs-test" </> filename)
+    if expected == actual then return [] else return [Problem filename actual]
 
 -- If the problem list is non-empty, prints the list of problems and exits with a nonzero status code to indicate failure.
-conclude (problems :: [FilePath]) =
+conclude (problems :: [Problem]) =
     if null problems then putStrLn "Okay!"
-    else die ("Problems: " <> show problems)
+    else Text.putStrLn (showProblems problems) *> exitFailure
+
+showProblems (problems :: [Problem]) =
+    Text.intercalate "\n------------------------\n"
+        ("Problems!" : map showOneProblem problems)
+
+showOneProblem (Problem filename content) =
+    "The output for file " <> Text.pack filename <> " is:\n" <>
+    Text.decodeUtf8 content

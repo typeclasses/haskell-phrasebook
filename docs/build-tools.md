@@ -38,7 +38,7 @@ You do not *have to* use Nix to run these Haskell programs, but you may find it 
 
 In addition to the code examples themselves, the results from running the examples are also included in this repository, in the `outputs` directory. An example's output is typically given the same name as its source file, with the extension changed; for example, the output of `hello-world.hs` is given by the file `outputs/hello-world.txt`.
 
-When any source code or dependency versions change, run `./tools/generate-outputs`. This script runs all of the examples and updates the output files.
+When any source code or dependency versions change, run `./tools/generate-outputs.hs`. This script runs all of the examples and updates the output files.
 
 Any examples that include nondeterministic behavior (such as `threads.hs`) have the nondeterministic portion of their output redacted as "..." to avoid including non-repeatable results in the output files.
 

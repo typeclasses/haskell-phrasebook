@@ -25,4 +25,4 @@ jobs:
         with:
           name: typeclasses
 
-      - run: ./tools/test
+      - run: ./tools/test.hs

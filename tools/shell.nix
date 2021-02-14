@@ -1,8 +1,9 @@
 let
   inherit (import ./default.nix) pkgs haskell ghcid;
+  inherit (pkgs) cacert nix rsync;
 in
   pkgs.mkShell {
-    buildInputs = [ haskell ghcid ];
+    buildInputs = [ haskell ghcid cacert nix rsync ];
     shellHook = ''
       export NIX_GHC="${haskell}/bin/ghc"
       export NIX_GHCPKG="${haskell}/bin/ghc-pkg"

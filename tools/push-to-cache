@@ -1,8 +1,7 @@
 #! /usr/bin/env nix-shell
-#! nix-shell --pure
+#! nix-shell --pure shell.nix
 #! nix-shell --keep NIX_PATH
 #! nix-shell -i runhaskell
-#! nix-shell -p ghc nix cachix cacert
 
 -- We use this script to upload the Nix shell environment to Cachix.
 

@@ -7,9 +7,7 @@ import Text.Read (readMaybe)
 
 import qualified Control.Concurrent.STM.TBQueue as TBQ
 
-
 seconds n = 1000000 * n
-
 
 threadsafeLog maxQueue = do
   queue <- atomically (TBQ.newTBQueue maxQueue)
@@ -29,13 +27,11 @@ threadsafeLog maxQueue = do
 
   return (logToQueue, printFromQueue)
 
-
 sing phrase log =
   for_ [1..5] $ \n -> do
     i <- randomRIO (1, 10000)
     threadDelay (seconds 1 `div` i + n)
     log phrase
-
 
 main = do
   (log, print) <- do

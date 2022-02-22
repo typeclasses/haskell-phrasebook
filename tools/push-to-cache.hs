@@ -9,8 +9,8 @@ import Control.Monad
 import Data.Foldable
 import System.Process
 
-main = traverse_ (build >=> push) ["haskell", "ghcid"]
+main = build >>= push
 
-build attr = fmap (head . lines) $ readProcess "nix-build" ["tools", "--attr", attr, "--no-out-link"] ""
+build = fmap (head . lines) $ readProcess "nix-build" ["tools/shell.nix", "--attr", "buildInputs", "--no-out-link"] ""
 
 push path = callProcess "cachix" ["push", "typeclasses", path]

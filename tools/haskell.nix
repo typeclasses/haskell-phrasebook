@@ -1,6 +1,18 @@
 { haskell }:
 
-haskell.packages.ghc8103.ghcWithPackages (p: [
+let
+
+  overrides = self: super:
+    {
+      optics = self.callHackage "optics" "0.4" {};
+      optics-core = self.callHackage "optics-core" "0.4" {};
+      optics-extra = self.callHackage "optics-extra" "0.4" {};
+      optics-th = self.callHackage "optics-th" "0.4" {};
+    };
+
+in
+
+(haskell.packages.ghc901.override { inherit overrides; }).ghcWithPackages (p: [
   p.async
   p.bytestring
   p.containers

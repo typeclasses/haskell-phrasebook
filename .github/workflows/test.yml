@@ -12,7 +12,7 @@ jobs:
       matrix:
         channel:
           - nixos-unstable
-          - nixos-20.09
+          - nixos-21.11
 
     steps:
       - uses: actions/checkout@v2.4.0

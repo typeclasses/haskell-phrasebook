@@ -26,4 +26,4 @@ function update {
   [[ $? == 0 ]] && echo "${TJQ}" >| "$FILE"
 }
 
-update tools/versions.json nixpkgs nixos-20.09
+update tools/versions.json nixpkgs nixos-21.11

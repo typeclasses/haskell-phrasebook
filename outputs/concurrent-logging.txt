@@ -1,19 +1,21 @@
-FaDL oaS  oRTlei
-  MDio
+--- log1.txt ---
+Fa Sol
+La Ti Do
+Do Re Mi
+La Ti Do
+Do Re Mi
+Fa Sol
+La Ti Do
+Fa Sol
+Do Re Mi
 
-DoLF aaR  eTS ioM liD
-
-o
-LaFD aoT  iSR oeDl o
-M
-i
----
-Do Re Mi
-La Ti Do
-Do Re Mi
-Fa Sol
-Fa Sol
+--- log2.txt ---
 Do Re Mi
 La Ti Do
 Fa Sol
 La Ti Do
+Fa Sol
+Do Re Mi
+La Ti Do
+Do Re Mi
+Fa Sol

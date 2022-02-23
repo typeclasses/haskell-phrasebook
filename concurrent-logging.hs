@@ -7,6 +7,7 @@ import Data.Foldable (for_)
 import System.Environment (lookupEnv)
 import System.Random (randomRIO)
 import Text.Read (readMaybe)
+import System.IO
 
 import qualified Control.Concurrent.STM.TQueue as TQ
 import qualified Control.Concurrent.STM.TVar as TV
@@ -28,25 +29,33 @@ choir log =
 -- Our demonstration program runs the "choir" two different ways:
 main =
   do
-    choir putStrLn -- The first way has a serious flaw, which we shall see in the output.
-    putStrLn "---"
-    withConcurrentLog choir -- The second way uses a queue to orchestrate the printing.
+    -- The first way has a serious flaw, which we shall see in the output.
+    withFile "log1.txt" WriteMode $ \h ->
+      do
+        hSetBuffering h NoBuffering
+        choir (hPutStrLn h)
 
-withConcurrentLog go = do
+    -- The second way uses a queue to orchestrate the printing.
+    withFile "log2.txt" WriteMode $ \h ->
+      do
+        hSetBuffering h NoBuffering
+        withConcurrentLog (hPutStrLn h) choir
+
+withConcurrentLog print go = do
     queue <- TQ.newTQueueIO
     stopVar <- TV.newTVarIO False
 
     let
       logToQueue msg = atomically (TQ.writeTQueue queue msg)
 
-      printFromQueue = do
+      loop = do
         randomDelay
         stop <- atomically (liftA2 (&&) (TQ.isEmptyTQueue queue) (TV.readTVar stopVar))
         unless stop $ do
           msg <- atomically (TQ.readTQueue queue)
-          putStrLn msg
-          printFromQueue
+          print msg
+          loop
 
     let stop = atomically (TV.writeTVar stopVar True)
 
-    concurrently_ printFromQueue (go logToQueue *> stop)
+    concurrently_ loop (go logToQueue *> stop)

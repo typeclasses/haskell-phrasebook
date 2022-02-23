@@ -1,5 +1,3 @@
-# The Haskell Phrasebook
-
 ![Haskell Phrasebook logo](logo.png)
 
 *The Haskell Phrasebook* is a free quick-start Haskell guide comprised of a sequence of small annotated programs. It provides a cursory overview of selected Haskell features, jumping-off points for further reading, and recommendations to help get you writing programs as soon as possible.

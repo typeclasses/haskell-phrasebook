@@ -1,8 +1,6 @@
 ---
-title: Thanks
+title: 🖤 Thanks
 ---
-
-# 🖤
 
 Thanks to the following people who have [contributed](https://typeclasses.github.io/haskell-phrasebook/contributing) to the Phrasebook:
 

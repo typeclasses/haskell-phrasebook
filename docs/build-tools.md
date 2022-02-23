@@ -2,46 +2,50 @@
 title: How to build and run the Phrasebook examples
 ---
 
-# Build tools
-
 ## Haskell language server
 
 If you are using Visual Studio Code, we recommend installing the [Haskell](https://marketplace.visualstudio.com/items?itemName=haskell.haskell) extension. Error messages and other helpful annotations will then appear in the editor.
 
+## ghcid
+
+If you are not using an editor with integrated language support, [ghcid](https://typeclasses.com/ghci/ghcid) is a good alternative.
+
+```sh
+$ ghcid --command 'cabal repl hello-world'
+```
+
+## GHCi
+
+To open a REPL, use the "cabal repl" command, giving as an argument the name of the program you want to load.
+
+```sh
+$ cabal repl hello-world
+
+λ> main
+hello world
+```
+
 ## Using Nix shell
 
-You do not *have to* use Nix to run these Haskell programs, but you may find it convenient.
+You do not have to use Nix to run these Haskell programs, but you may find it convenient.
 
-1. [Install Nix](https://nixos.org/nix/manual/#chap-installation)
+[Install Nix](https://nixos.org/nix/manual/#chap-installation),
 
-2. Install [Cachix](https://cachix.org/), and add the `typeclasses` cache. This step is optional, but will greatly reduce build time.
+Optionally, install [Cachix](https://cachix.org/) and add the `typeclasses` cache. This step is optional, but will greatly reduce build time.
 
-    ```sh
-    $ nix-env -iA 'cachix' -f 'https://cachix.org/api/v1/install'
-    $ cachix use 'typeclasses'
-    ```
+```sh
+$ nix-env -iA 'cachix' -f 'https://cachix.org/api/v1/install'
+$ cachix use 'typeclasses'
+```
 
-3. Enter a Nix shell:
+Within the Nix shell, you have all of the dependencies required by the examples in the Phrasebook. For example, you can run commands like `runhaskell` and `ghcid`.
 
-    ```sh
-    $ nix-shell 'tools/shell.nix'
-    ```
+```sh
+$ nix-shell 'tools/shell.nix'
 
-4. Within the Nix shell, you have all of the dependencies required by the examples in the Phrasebook. For example, you can run commands like `runhaskell` and `ghcid`:
-
-    ```sh
-    [nix-shell]$ ghc --version
-    The Glorious Glasgow Haskell Compilation System, version 9.0.1
-    ```
-
-    ```sh
-    [nix-shell]$ runhaskell 'hello-world.hs'
-    hello world
-    ```
-
-    ```sh
-    [nix-shell]$ ghcid --command 'ghci hello-world.hs' --test ':main'
-    ```
+[nix-shell]$ ghc --version
+The Glorious Glasgow Haskell Compilation System, version 9.0.1
+```
 
 ## Outputs
 

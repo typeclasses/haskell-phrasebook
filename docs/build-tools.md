@@ -4,6 +4,10 @@ title: How to build and run the Phrasebook examples
 
 # Build tools
 
+## Haskell language server
+
+If you are using Visual Studio Code, we recommend installing the [Haskell](https://marketplace.visualstudio.com/items?itemName=haskell.haskell) extension. Error messages and other helpful annotations will then appear in the editor.
+
 ## Using Nix shell
 
 You do not *have to* use Nix to run these Haskell programs, but you may find it convenient.

@@ -1,4 +1,0 @@
-{
-  "hic.executablePath": "./tools/ghcide",
-  "hic.arguments": "--lsp"
-}

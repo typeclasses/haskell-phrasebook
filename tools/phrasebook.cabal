@@ -1,0 +1,152 @@
+cabal-version: 3.0
+
+name: phrasebook
+version: 0
+
+common base
+    hs-source-dirs: ..
+    default-language: Haskell2010
+
+    -- First we enable all warnings. This is good practice for
+    -- any project, because GHC does not by default enable all
+    -- warnings that are likely indicators of serious problems.
+    ghc-options: -Wall
+
+    -- Next we disable some specific warnings. In a typical
+    -- project we would leave all of these enabled, but we
+    -- allow the Phrasebook code to be a bit more lax so that
+    -- we can shorten the code and simplify its presentation.
+    ghc-options:
+        -fno-warn-missing-signatures
+        -fno-warn-name-shadowing
+        -fno-warn-type-defaults
+        -fno-warn-unused-do-bind
+        -fno-warn-unused-imports
+
+executable bounded-queues
+    import: base
+    main-is: bounded-queues.hs
+    build-depends: async, base,
+        mwc-random, safe-exceptions, stm
+
+executable branching
+    import: base
+    main-is: branching.hs
+    build-depends: base, time
+
+executable common-types
+    import: base
+    main-is: common-types.hs
+    build-depends: base
+
+executable crypto-hashing
+    import: base
+    main-is: crypto-hashing.hs
+    build-depends: base, bytestring,
+        cryptonite, memory, utf8-string
+
+executable dynamic
+    import: base
+    main-is: dynamic.hs
+    build-depends: base
+
+executable enum-ranges
+    import: base
+    main-is: enum-ranges.hs
+    build-depends: base
+
+executable file-handles
+    import: base
+    main-is: file-handles.hs
+    build-depends: base, directory
+
+executable folding-lists
+    import: base
+    main-is: folding-lists.hs
+    build-depends: base
+
+executable for-loops
+    import: base
+    main-is: for-loops.hs
+    build-depends: base
+
+executable functions
+    import: base
+    main-is: functions.hs
+    build-depends: base
+
+executable guard
+    import: base
+    main-is: guard.hs
+    build-depends: base
+
+executable hashing
+    import: base
+    main-is: hashing.hs
+    build-depends: base, hashable
+
+executable hello-world
+    import: base
+    main-is: hello-world.hs
+    build-depends: base
+
+executable if-else
+    import: base
+    main-is: if-else.hs
+    build-depends: base
+
+executable invert
+    import: base
+    main-is: invert.hs
+    build-depends: base, containers, generic-deriving
+
+executable logging
+    import: base
+    main-is: logging.hs
+    build-depends: base, directory, safe-exceptions
+
+executable moments-in-time
+    import: base
+    main-is: moments-in-time.hs
+    build-depends: base, time
+
+executable monitoring
+    import: base
+    main-is: monitoring.hs
+    build-depends: async, base, bytestring, containers,
+        network, process, safe-exceptions, signal, stm
+
+executable mutable-references
+    import: base
+    main-is: mutable-references.hs
+    build-depends: base, stm
+
+executable partial-application
+    import: base
+    main-is: partial-application.hs
+    build-depends: base
+
+executable records-with-optics
+    import: base
+    main-is: records-with-optics.hs
+    build-depends: base, optics
+
+executable threads
+    import: base
+    main-is: threads.hs
+    build-depends: base, stm
+
+executable timeouts
+    import: base
+    main-is: timeouts.hs
+    build-depends: base, stm
+
+executable transactions
+    import: base
+    main-is: transactions.hs
+    build-depends: base, containers, mwc-random, stm
+
+executable variables
+    import: base
+    main-is: variables.hs
+    build-depends: base

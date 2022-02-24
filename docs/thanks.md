@@ -11,4 +11,4 @@ Thanks to the following people who have [contributed](https://typeclasses.github
 - [Florian Beeres](https://fbrs.io/) -- [Records with optics](https://github.com/typeclasses/haskell-phrasebook/pull/34)
 - [Yuras Shumovich](https://twitter.com/shumovichy) -- assistance with exception handling in `monitoring.hs` ([1](https://twitter.com/shumovichy/status/1207093768182288386), [2](https://twitter.com/shumovichy/status/1207637508412059648))
 - [gutierrezje](https://github.com/gutierrezje) -- [Folding lists](https://github.com/typeclasses/haskell-phrasebook/pull/20)
-- [Daniel Brice](https://github.com/friedbrice) -- [Logging](https://github.com/typeclasses/haskell-phrasebook/pull/39)
+- [Daniel Brice](https://github.com/friedbrice) -- [Logging](https://github.com/typeclasses/haskell-phrasebook/pull/39) and [Concurrent logging](https://github.com/typeclasses/haskell-phrasebook/pull/40)

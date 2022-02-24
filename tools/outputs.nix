@@ -7,6 +7,7 @@ examples = [
     { name = "bounded-queues"; file = ../bounded-queues.hs; sed = "s!^(finish:.*|start: (6|7|8|9|10))$!...!"; }
     { name = "branching"; file = ../branching.hs; sed = "s!^It's .* noon$!It's ... noon!"; }
     { name = "common-types"; file = ../common-types.hs; }
+    { name = "concurrent-logging"; file = ../concurrent-logging.hs; after = ["echo '--- log1.txt ---' >> $out" "cat log1.txt >> $out" "echo '\n--- log2.txt ---' >> $out" "cat log2.txt >> $out"]; }
     { name = "crypto-hashing"; file = ../crypto-hashing.hs; }
     { name = "dynamic"; file = ../dynamic.hs; }
     { name = "enum-ranges"; file = ../enum-ranges.hs; }

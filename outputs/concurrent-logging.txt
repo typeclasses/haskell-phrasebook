@@ -1,0 +1,21 @@
+--- log1.txt ---
+Fa Sol
+La Ti Do
+Do Re Mi
+La Ti Do
+Do Re Mi
+Fa Sol
+La Ti Do
+Fa Sol
+Do Re Mi
+
+--- log2.txt ---
+Do Re Mi
+La Ti Do
+Fa Sol
+La Ti Do
+Fa Sol
+Do Re Mi
+La Ti Do
+Do Re Mi
+Fa Sol

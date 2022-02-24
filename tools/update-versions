@@ -27,3 +27,4 @@ function update {
 }
 
 update tools/versions.json nixpkgs nixos-21.11
+update tools/versions.json unstable nixos-unstable

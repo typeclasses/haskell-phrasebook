@@ -1,2 +1,0 @@
-Task A: Gave up after one second
-Task B: Completed in half a second

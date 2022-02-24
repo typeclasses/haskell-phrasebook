@@ -12,7 +12,6 @@ import System.Environment
 import System.Exit
 import System.IO
 import System.Signal
-import System.Process
 
 import Control.Concurrent
 import Control.Concurrent.Async
@@ -42,22 +41,24 @@ main =
     case args of
         ["aggregate-reports"]  -> aggregateReportsMain
         ["send-demo-reports"]  -> sendDemoReportsMain
-        ["full-demonstration"] -> fullDemonstrationMain
         _                      -> die "Invalid args"
 
 aggregateReportsMain =
-  do
-    reportQueue <- atomically newTQueue
-    alarmQueue <- atomically newTQueue
+    withServerSocket $ \serverSocket ->
+      do
+        putStrLn "The monitoring server has started."
 
-    foldr1 race_
-      [ receiveReports reportQueue
-      , analyzeReports reportQueue alarmQueue
-      , sendAlarms alarmQueue
-      , waitForTerminationSignal
-      ]
+        reportQueue <- atomically newTQueue
+        alarmQueue <- atomically newTQueue
 
-    putStrLn "The monitoring server is stopping."
+        foldr1 race_
+          [ receiveReports serverSocket reportQueue
+          , analyzeReports reportQueue alarmQueue
+          , sendAlarms alarmQueue
+          , waitForTerminationSignal
+          ]
+
+        putStrLn "The monitoring server is stopping."
 
 waitForTerminationSignal =
   do
@@ -91,16 +92,15 @@ withServerSocket action =
         S.listen serverSocket S.maxListenQueue
         action serverSocket
 
-receiveReports reportQueue =
-    withServerSocket $ \serverSocket ->
-      forever $
-        mask $ \unmask ->
-          do
-            (clientSocket, _clientAddr) <- S.accept serverSocket
+receiveReports serverSocket reportQueue =
+    forever $
+      mask $ \unmask ->
+        do
+          (clientSocket, _clientAddr) <- S.accept serverSocket
 
-            forkFinally
-                (unmask (receiveReports' clientSocket reportQueue))
-                (\_ -> S.close clientSocket)
+          forkFinally
+              (unmask (receiveReports' clientSocket reportQueue))
+              (\_ -> S.close clientSocket)
 
 receiveReports' clientSocket reportQueue = continue
   where
@@ -117,7 +117,9 @@ receiveReports' clientSocket reportQueue = continue
 
 receiveReports'' receivedBytes reportQueue =
     for_ @[] (Data.ByteString.Char8.unpack receivedBytes) $ \c ->
-        for_ @Maybe (decodeReport c) $ \r ->
+        for_ @Maybe (decodeReport c) $ \r -> do
+            putStrLn (case r of Success -> "1 (success)"
+                                Failure -> "0 (failure)")
             atomically (writeTQueue reportQueue r)
 
 
@@ -176,8 +178,6 @@ sendDemoReportsMain =
       , sendReports reportQueue
       ]
 
-    putStrLn "Done sending demo reports."
-
 
 ---  A fixed schedule of event reports for demonstration purposes  ---
 
@@ -205,20 +205,5 @@ sendReports reportQueue =
         forever $
           do
             r <- atomically (readTQueue reportQueue)
-            putStrLn (case r of Success -> "1 (success)"
-                                Failure -> "0 (failure)")
             sendAll clientSocket
                 (Data.ByteString.Char8.pack [encodeReport r])
-
-
----  Full demonstration  ---
-
-fullDemonstrationMain =
-  do
-    server <- spawnCommand
-        "runhaskell monitoring.hs aggregate-reports"
-    threadDelay 1_000_000
-    callCommand "runhaskell monitoring.hs send-demo-reports"
-    terminateProcess server
-    waitForProcess server
-    putStrLn "The full demonstration is complete."

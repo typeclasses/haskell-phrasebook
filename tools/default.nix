@@ -4,12 +4,12 @@ rec {
 
   pkgs = import versions.nixpkgs {};
 
-  inherit (pkgs) callPackage haskellPackages;
+  unstable = import versions.unstable {};
 
-  haskell = callPackage ./haskell.nix {};
+  haskell = unstable.callPackage ./haskell.nix {};
 
-  inherit (haskellPackages) ghcid;
+  inherit (pkgs.haskellPackages) ghcid;
 
-  outputs = callPackage ./outputs.nix { inherit haskell; };
+  outputs = pkgs.callPackage ./outputs.nix { inherit haskell; };
 
 }

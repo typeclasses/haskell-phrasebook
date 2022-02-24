@@ -2,7 +2,13 @@
   "nixpkgs": {
     "owner": "NixOS",
     "repo": "nixpkgs",
-    "rev": "40ef692a55b188b1f5ae3967f3fc7808838c3f1d",
-    "sha256": "1y3vqm9d543xwr0zmpq270365g1zh7zc9695m46igxjjqkfd3g3q"
+    "rev": "4275a321beab5a71872fb7a5fe5da511bb2bec73",
+    "sha256": "1p3pn7767ifbg08nmgjd93iqk0z87z4lv29ypalj9idwd3chsm69"
+  },
+  "unstable": {
+    "owner": "NixOS",
+    "repo": "nixpkgs",
+    "rev": "7f9b6e2babf232412682c09e57ed666d8f84ac2d",
+    "sha256": "03nb8sbzgc3c0qdr1jbsn852zi3qp74z4qcy7vrabvvly8rbixp2"
   }
 }

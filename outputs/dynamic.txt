@@ -1,3 +1,0 @@
-The answer is yes
-5 is an integer
-Unrecognized type: [Char]

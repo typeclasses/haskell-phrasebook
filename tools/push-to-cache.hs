@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell --pure shell.nix
+#! nix-shell --pure ../shell.nix
 #! nix-shell --keep NIX_PATH
 #! nix-shell -i runhaskell
 
@@ -11,6 +11,6 @@ import System.Process
 
 main = build >>= push
 
-build = fmap (head . lines) $ readProcess "nix-build" ["tools/shell.nix", "--attr", "buildInputs", "--no-out-link"] ""
+build = fmap (head . lines) $ readProcess "nix-build" ["shell.nix", "--attr", "buildInputs", "--no-out-link"] ""
 
 push path = callProcess "cachix" ["push", "typeclasses", path]

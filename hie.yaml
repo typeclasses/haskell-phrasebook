@@ -1,52 +1,129 @@
 cradle:
   cabal:
+    - path: "./tests/PhrasebookTesting.hs"
+      component: "lib:phrasebook-testing"
+
     - path: "./bounded-queues.hs"
       component: "exe:bounded-queues"
+    - path: "./tests/test-bounded-queues.hs"
+      component: "test:test-bounded-queues"
+
     - path: "./branching.hs"
       component: "exe:branching"
+    - path: "./tests/test-branching.hs"
+      component: "test:test-branching"
+
     - path: "./common-types.hs"
       component: "exe:common-types"
+    - path: "./tests/test-common-types.hs"
+      component: "test:test-common-types"
+
     - path: "./crypto-hashing.hs"
       component: "exe:crypto-hashing"
+    - path: "./tests/test-crypto-hashing.hs"
+      component: "test:test-crypto-hashing"
+
     - path: "./dynamic.hs"
       component: "exe:dynamic"
+    - path: "./tests/test-dynamic.hs"
+      component: "test:test-dynamic"
+
     - path: "./enum-ranges.hs"
       component: "exe:enum-ranges"
+    - path: "./tests/test-enum-ranges.hs"
+      component: "test:test-enum-ranges"
+
     - path: "./file-handles.hs"
       component: "exe:file-handles"
+    - path: "./tests/test-file-handles.hs"
+      component: "test:test-file-handles"
+
     - path: "./folding-lists.hs"
       component: "exe:folding-lists"
+    - path: "./tests/test-folding-lists.hs"
+      component: "test:test-folding-lists"
+
     - path: "./for-loops.hs"
       component: "exe:for-loops"
+    - path: "./tests/test-for-loops.hs"
+      component: "test:test-for-loops"
+
     - path: "./functions.hs"
       component: "exe:functions"
+    - path: "./tests/test-functions.hs"
+      component: "test:test-functions"
+
     - path: "./guard.hs"
       component: "exe:guard"
+    - path: "./tests/test-guard.hs"
+      component: "test:test-guard"
+
     - path: "./hashing.hs"
       component: "exe:hashing"
+    - path: "./tests/test-hashing.hs"
+      component: "test:test-hashing"
+
     - path: "./hello-world.hs"
       component: "exe:hello-world"
+    - path: "./tests/test-hello-world.hs"
+      component: "test:test-hello-world"
+
     - path: "./if-else.hs"
       component: "exe:if-else"
+    - path: "./tests/test-if-else.hs"
+      component: "test:test-if-else"
+
     - path: "./invert.hs"
       component: "exe:invert"
+    - path: "./tests/test-invert.hs"
+      component: "test:test-invert"
+
     - path: "./logging.hs"
       component: "exe:logging"
+    - path: "./tests/test-logging.hs"
+      component: "test:test-logging"
+
     - path: "./moments-in-time.hs"
       component: "exe:moments-in-time"
+    - path: "./tests/test-moments-in-time.hs"
+      component: "test:test-moments-in-time"
+
     - path: "./monitoring.hs"
       component: "exe:monitoring"
+    - path: "./tests/test-monitoring.hs"
+      component: "test:test-monitoring"
+
     - path: "./mutable-references.hs"
       component: "exe:mutable-references"
+    - path: "./tests/test-mutable-references.hs"
+      component: "test:test-mutable-references"
+
     - path: "./partial-application.hs"
       component: "exe:partial-application"
+    - path: "./tests/test-partial-application.hs"
+      component: "test:test-partial-application"
+
     - path: "./records-with-optics.hs"
       component: "exe:records-with-optics"
+    - path: "./tests/test-records-with-optics.hs"
+      component: "test:test-records-with-optics"
+
     - path: "./threads.hs"
       component: "exe:threads"
+    - path: "./tests/test-threads.hs"
+      component: "test:test-threads"
+
     - path: "./timeouts.hs"
       component: "exe:timeouts"
+    - path: "./tests/test-timeouts.hs"
+      component: "test:test-timeouts"
+
     - path: "./transactions.hs"
       component: "exe:transactions"
+    - path: "./tests/test-transactions.hs"
+      component: "test:test-transactions"
+
     - path: "./variables.hs"
       component: "exe:variables"
+    - path: "./tests/test-variables.hs"
+      component: "test:test-variables"

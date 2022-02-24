@@ -1,4 +1,5 @@
-{-# LANGUAGE TemplateHaskell #-}
+{-# options_ghc -fno-warn-unused-top-binds #-}
+{-# language TemplateHaskell #-}
 
 import Optics
 

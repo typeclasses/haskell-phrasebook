@@ -24,5 +24,8 @@ jobs:
       - uses: cachix/cachix-action@v10
         with:
           name: typeclasses
+          skipPush: true
 
-      - run: ./tools/test.hs
+      - run: nix-shell --pure --run 'cabal build all'
+
+      - run: nix-shell --pure --run 'cabal test all'

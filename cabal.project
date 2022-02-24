@@ -1,1 +1,6 @@
-packages: tools/phrasebook.cabal
+packages: ./phrasebook.cabal
+
+constraints:
+    hashable >= 1.3.5
+  , optics >= 0.4
+  , relude >= 1

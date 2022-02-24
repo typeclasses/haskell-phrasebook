@@ -1,0 +1,307 @@
+cabal-version: 3.0
+
+name: phrasebook
+version: 0
+
+common base
+    default-language: Haskell2010
+
+    -- Enable all warnings. This is good practice for any
+    -- project, because GHC does not by default enable all
+    -- warnings that are likely indicators of serious problems.
+    ghc-options: -Wall
+
+common example
+    import: base
+    hs-source-dirs: .
+
+    -- For the examples, we disable some specific warnings.
+    -- In a typical project we would leave all of these enabled,
+    -- but we allow the Phrasebook code to be a bit more lax so
+    -- that we can shorten the code and simplify its presentation.
+    ghc-options:
+        -fno-warn-missing-signatures
+        -fno-warn-name-shadowing
+        -fno-warn-type-defaults
+        -fno-warn-unused-do-bind
+        -fno-warn-unused-imports
+
+common testing
+    import: base
+    hs-source-dirs: ./tests
+    ghc-options: -fno-warn-missing-signatures
+    build-depends: base, containers, megaparsec,
+        phrasebook-testing
+    default-extensions:
+        BlockArguments NumericUnderscores OverloadedLists
+        OverloadedStrings ScopedTypeVariables TypeApplications
+    mixins:
+        base hiding (Prelude)
+      , phrasebook-testing (PhrasebookTesting as Prelude)
+
+library phrasebook-testing
+    import: base
+    hs-source-dirs: ./tests
+    exposed-modules: PhrasebookTesting
+    default-extensions:
+        BlockArguments NumericUnderscores OverloadedLists
+        OverloadedStrings ScopedTypeVariables TypeApplications
+    build-depends: base, bytestring, containers,
+        hedgehog, directory, megaparsec, mtl,
+        process, relude, temporary, text
+    mixins:
+        base hiding (Prelude)
+      , relude (Relude as Prelude)
+
+executable bounded-queues
+    import: example
+    main-is: bounded-queues.hs
+    build-depends: async, base,
+        mwc-random, safe-exceptions, stm
+
+test-suite test-bounded-queues
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-bounded-queues.hs
+
+executable branching
+    import: example
+    main-is: branching.hs
+    build-depends: base, time
+
+test-suite test-branching
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-branching.hs
+
+executable common-types
+    import: example
+    main-is: common-types.hs
+    build-depends: base
+
+test-suite test-common-types
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-common-types.hs
+
+executable crypto-hashing
+    import: example
+    main-is: crypto-hashing.hs
+    build-depends: base, bytestring,
+        cryptonite, memory, utf8-string
+
+test-suite test-crypto-hashing
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-bounded-queues.hs
+
+executable dynamic
+    import: example
+    main-is: dynamic.hs
+    build-depends: base
+
+test-suite test-dynamic
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-dynamic.hs
+
+executable enum-ranges
+    import: example
+    main-is: enum-ranges.hs
+    build-depends: base
+
+test-suite test-enum-ranges
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-enum-ranges.hs
+
+executable file-handles
+    import: example
+    main-is: file-handles.hs
+    build-depends: base, directory
+
+test-suite test-file-handles
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-file-handles.hs
+
+executable folding-lists
+    import: example
+    main-is: folding-lists.hs
+    build-depends: base
+
+test-suite test-folding-lists
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-folding-lists.hs
+
+executable for-loops
+    import: example
+    main-is: for-loops.hs
+    build-depends: base
+
+test-suite test-for-loops
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-for-loops.hs
+
+executable functions
+    import: example
+    main-is: functions.hs
+    build-depends: base
+
+test-suite test-functions
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-functions.hs
+
+executable guard
+    import: example
+    main-is: guard.hs
+    build-depends: base
+
+test-suite test-guard
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-guard.hs
+
+executable hashing
+    import: example
+    main-is: hashing.hs
+    build-depends: base, hashable
+
+test-suite test-hashing
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-hashing.hs
+
+executable hello-world
+    import: example
+    main-is: hello-world.hs
+    build-depends: base
+
+test-suite test-hello-world
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-hello-world.hs
+
+executable if-else
+    import: example
+    main-is: if-else.hs
+    build-depends: base
+
+test-suite test-if-else
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-if-else.hs
+
+executable invert
+    import: example
+    main-is: invert.hs
+    build-depends: base, containers, generic-deriving
+
+test-suite test-invert
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-invert.hs
+
+executable logging
+    import: example
+    main-is: logging.hs
+    build-depends: base, directory, safe-exceptions
+
+test-suite test-logging
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-logging.hs
+
+executable moments-in-time
+    import: example
+    main-is: moments-in-time.hs
+    build-depends: base, time
+
+test-suite test-moments-in-time
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-moments-in-time.hs
+
+executable monitoring
+    import: example
+    main-is: monitoring.hs
+    build-depends: async, base, bytestring, containers,
+        network, process, safe-exceptions, signal, stm
+
+test-suite test-monitoring
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-monitoring.hs
+
+executable mutable-references
+    import: example
+    main-is: mutable-references.hs
+    build-depends: base, stm
+
+test-suite test-mutable-references
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-mutable-references.hs
+
+executable partial-application
+    import: example
+    main-is: partial-application.hs
+    build-depends: base
+
+test-suite test-partial-application
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-partial-application.hs
+
+executable records-with-optics
+    import: example
+    main-is: records-with-optics.hs
+    build-depends: base, optics
+
+test-suite test-records-with-optics
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-records-with-optics.hs
+
+executable threads
+    import: example
+    main-is: threads.hs
+    build-depends: base, stm
+
+test-suite test-threads
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-threads.hs
+
+executable timeouts
+    import: example
+    main-is: timeouts.hs
+    build-depends: base, stm
+
+test-suite test-timeouts
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-timeouts.hs
+
+executable transactions
+    import: example
+    main-is: transactions.hs
+    build-depends: base, containers, mwc-random, stm
+
+test-suite test-transactions
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-transactions.hs
+
+executable variables
+    import: example
+    main-is: variables.hs
+    build-depends: base
+
+test-suite test-variables
+    import: testing
+    type: exitcode-stdio-1.0
+    main-is: test-variables.hs
